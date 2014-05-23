@@ -1,0 +1,39 @@
+{
+    "name":        "hostnet/form-handler-bundle",
+    "description": "Hostnet form handler to provide an easier way of handling forms in actions",
+    "license":     "proprietary",
+    "authors": [
+        {
+            "name":  "Iltar van der Berg",
+            "email": "ivanderberg@hostnet.nl"
+        },
+        {
+            "name":  "Yannick de Lange",
+            "email": "ydelange@hostnet.nl"
+        }
+    ],
+
+    "require": {
+        "php"                           : ">=5.4",
+        "sensio/framework-extra-bundle" : "3.*",
+        "symfony/http-foundation"       : "2.*, >=2.3"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+
+    "minimum-stability": "stable",
+
+    "autoload": {
+        "psr-4" : {
+            "Hostnet\\Bundle\\FormHandlerBundle\\" : "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4" : {
+            "Hostnet\\Bundle\\FormHandlerBundle\\" : "test/"
+        }
+    }
+}

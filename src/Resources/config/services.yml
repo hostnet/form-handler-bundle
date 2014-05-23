@@ -1,0 +1,5 @@
+services:
+    form_handler.param_converter:
+        class: Hostnet\Bundle\FormHandlerBundle\Service\FormParamConverter
+        arguments:
+            - "@container"
