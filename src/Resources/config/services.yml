@@ -2,4 +2,12 @@ services:
     form_handler.param_converter:
         class: Hostnet\Bundle\FormHandlerBundle\Service\FormParamConverter
         arguments:
-            - "@container"
+            - "@service_container"
+            - "@form.factory"
+        tags:
+            - { name: request.param_converter, priority: false, converter: form_information_converter }
+
+    form_handler.provider.simple:
+        class: Hostnet\Component\Form\Simple\SimpleFormProvider
+        arguments:
+            - "@form.factory"

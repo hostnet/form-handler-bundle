@@ -5,6 +5,8 @@ use Hostnet\Component\Form\FormInformationInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Yannick de Lange <ydelange@hostnet.nl>
@@ -18,17 +20,24 @@ class FormParamConverter implements ParamConverterInterface
     private $container;
 
     /**
+     * @var FormFactoryInterface
+     */
+    private $form_factory;
+
+    /**
      * @var array
      */
     private $handlers;
 
     /**
-     * @param Container $container
+     * @param ContainerInterface   $container
+     * @param FormFactoryInterface $form_factory
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, FormFactoryInterface $form_factory)
     {
-        $this->container = $container;
-        $this->handlers  = [];
+        $this->container    = $container;
+        $this->form_factory = $form_factory;
+        $this->handlers     = [];
     }
 
     /**
@@ -46,13 +55,21 @@ class FormParamConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration)
     {
         $options    = $configuration->getOptions();
-        $service_id = $options['service_id'];
+        $service_id = isset($options['service_id'])
+            ? $options['service_id']
+            : $this->getServiceIdForClassName($configuration);
         $handler    = $this->container->get($service_id);
         $class      = $this->handlers[$service_id];
+
 
         if (!$handler instanceof FormInformationInterface || get_class($handler) !== $class) {
             return;
         }
+
+        // set the form which is associated with the handler
+        $handler->setForm(
+            $this->form_factory->create($handler->getType(), $handler->getData(), $handler->getOptions())
+        );
 
         $request->attributes->set($configuration->getName(), $handler);
     }
@@ -62,12 +79,33 @@ class FormParamConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration)
     {
-        if (!array_key_exists('service_id', $configuration->getOptions())) {
+        return in_array($configuration->getClass(), $this->handlers);
+    }
+
+    /**
+     * @param ParamConverter $configuration
+     * @return string
+     */
+    private function getServiceIdForClassName(ParamConverter $configuration)
+    {
+        $service_ids = [];
+        $class       = $configuration->getClass();
+        foreach($this->handlers as $service_id => $service_class) {
+            if ($class === $service_class) {
+                $service_ids[] = $service_id;
+            }
+        }
+        if (count($service_ids) === 0) {
             throw new \InvalidArgumentException(
-                sprintf("No service_id found for parameter converter %s.", $configuration->getName())
+                    sprintf("No service_id found for parameter converter %s.", $configuration->getName())
+            );
+        }
+        if (count($service_ids) > 1) {
+            throw new \InvalidArgumentException(
+                    sprintf("More than one service_id found for parameter converter %s.", $configuration->getName())
             );
         }
 
-        return in_array($configuration->getClass(), $this->handlers);
+        return $service_ids[0];
     }
 }
