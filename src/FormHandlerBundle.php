@@ -1,7 +1,7 @@
 <?php
 namespace Hostnet\Bundle\FormHandlerBundle;
 
-use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParameterConverterCompilerPass;
+use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -17,7 +17,6 @@ class FormHandlerBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
-        $container->addCompilerPass(new FormParameterConverterCompilerPass());
+        $container->addCompilerPass(new FormParamConverterCompilerPass());
     }
 }
