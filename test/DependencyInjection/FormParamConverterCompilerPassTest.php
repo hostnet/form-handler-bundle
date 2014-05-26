@@ -3,6 +3,7 @@
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
@@ -40,12 +41,7 @@ class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
     public function testProcess($tagged_services)
     {
         $container  = new ContainerBuilder();
-        $definition = $this
-            ->getMockBuilder('Symfony\Component\DependencyInjection\Definition')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $container->setDefinition('form_handler.param_converter', $definition);
+        $container->setDefinition('form_handler.param_converter', new Definition());
 
         foreach ($tagged_services as $id => $tag) {
             $container->register($id)->addTag($tag, ['tests']);
