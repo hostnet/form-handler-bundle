@@ -1,6 +1,6 @@
 services:
     form_handler.param_converter:
-        class: Hostnet\Bundle\FormHandlerBundle\Service\FormParamConverter
+        class: Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
         arguments:
             - "@service_container"
             - "@form.factory"

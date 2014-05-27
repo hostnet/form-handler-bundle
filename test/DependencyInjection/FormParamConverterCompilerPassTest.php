@@ -1,5 +1,4 @@
 <?php
-
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
