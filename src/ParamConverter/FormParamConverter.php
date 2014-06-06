@@ -94,19 +94,19 @@ class FormParamConverter implements ParamConverterInterface
     {
         $service_ids = [];
         $class       = $configuration->getClass();
-        foreach($this->handlers as $service_id => $service_class) {
+        foreach ($this->handlers as $service_id => $service_class) {
             if ($class === $service_class) {
                 $service_ids[] = $service_id;
             }
         }
         if (count($service_ids) === 0) {
             throw new \InvalidArgumentException(
-                    sprintf("No service_id found for parameter converter %s.", $configuration->getName())
+                sprintf("No service_id found for parameter converter %s.", $configuration->getName())
             );
         }
         if (count($service_ids) > 1) {
             throw new \InvalidArgumentException(
-                    sprintf("More than one service_id found for parameter converter %s.", $configuration->getName())
+                sprintf("More than one service_id found for parameter converter %s.", $configuration->getName())
             );
         }
 

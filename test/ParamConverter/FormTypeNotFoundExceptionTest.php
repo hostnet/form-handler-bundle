@@ -16,7 +16,7 @@ class FormTypeNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
     public function testConstructFormTypeInterface()
     {
         $class_name = 'MyTestType';
-        $type = $this
+        $type       = $this
             ->getMockBuilder('Symfony\Component\Form\FormTypeInterface')
             ->setMockClassName($class_name)
             ->getMock();

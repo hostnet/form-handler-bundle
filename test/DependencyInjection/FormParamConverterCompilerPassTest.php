@@ -39,13 +39,12 @@ class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcess($tagged_services)
     {
-        $container  = new ContainerBuilder();
+        $container = new ContainerBuilder();
         $container->setDefinition('form_handler.param_converter', new Definition());
 
         foreach ($tagged_services as $id => $tag) {
             $container->register($id)->addTag($tag, ['tests']);
         }
-
 
         $pass = new FormParamConverterCompilerPass();
         $pass->process($container);
