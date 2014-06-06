@@ -36,6 +36,7 @@ Then add the bundle in your AppKernel:
 
 In order to use the form handler, simply create a service that contains your form information. A simple example would be. 
 ```php
+use Hostnet\Component\Form\FormFailureHandlerInterface;
 use Hostnet\Component\Form\FormInformationInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
