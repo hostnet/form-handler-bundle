@@ -34,8 +34,7 @@ Then add the bundle in your AppKernel:
 
 # Usage
 
-In order to use the form handler, simply create a simple service that contains your form information. A simple example would be.
-
+In order to use the form handler, simply create a service that contains your form information. A simple example would be. 
 ```php
 use Hostnet\Component\Form\FormInformationInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
@@ -43,7 +42,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class MyFormInformation implements FormInformationInterface, FormSuccesHandlerInterface
+class MyFormInformation implements FormInformationInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
     private $user;
@@ -93,8 +92,16 @@ class MyFormInformation implements FormInformationInterface, FormSuccesHandlerIn
         // ...
         return new RedirectResponse($this->router->generate("my-route"));
     }
+    
+    public function onFailure(Request $request)
+    {
+        // log the failed form post, or create a custom redirect.
+    }
 }
 ```
+>*Note*: Implementing the ``FormSuccesHandlerInterface`` and ``FormFailureHandlerInterface`` is optional and in most cases you will not need the ``FormFailureHandlerInterface`` since you will want to render the page again but with the form errors.
+
+
 Then create a service and tag it with form.handler
 ```yaml
 my_form.handler:
