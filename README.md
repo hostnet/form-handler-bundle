@@ -40,6 +40,7 @@ In order to use the form handler, simply create a simple service that contains y
 use Hostnet\Component\Form\FormInformationInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
 class MyFormInformation implements FormInformationInterface, FormSuccesHandlerInterface
@@ -84,7 +85,7 @@ class MyFormInformation implements FormInformationInterface, FormSuccesHandlerIn
         $this->form = $form;
     }
 
-    public function onSuccess()
+    public function onSuccess(Request $request)
     {
         // do something with the form data, like setting some data in the user
         $user->setUsername($this->data->getUsername());
