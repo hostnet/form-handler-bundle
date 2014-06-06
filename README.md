@@ -6,7 +6,11 @@ The form handler bundle is designed give extra support on the form handler compo
 
 In your composer.json
 ```json
-"hostnet/form-handler-bundle" : "master@dev"
+{
+    "require" : {
+        "hostnet/form-handler-bundle" : "master@dev"
+    }
+}
 ```
 >*Note*: Recommend is to use the current stable tag.
 
