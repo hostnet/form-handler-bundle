@@ -1,6 +1,16 @@
 form-handler-bundle
 ===================
-The form handler bundle is designed give extra support on the form handler component. This includes predefined services like the ```SimpleFormProvider``` and a handy ParamCoverter to easily inject your form handler into a controller.
+The form handler bundle is designed give extra support on the [form handler component](https://github.com/hostnet/form-handler-component). This includes predefined services like the ```SimpleFormProvider``` and a handy ParamCoverter to easily inject your form handler into a controller.
+
+This bundle wraps itself around the form-handler-component which in turn, wraps itself around a form. It provides a small interface that you can use to handle the forms by sending through the ```Request``` and ```FormInformationInterface```. This interface requires you to implement a few methods. By adding 2 more optional interfaces; ```FormFailureHandlerInterface``` and ```FormSuccessHandlerInterface```, you can move your success and failure branches away.
+
+Moving away your success and failure branches will cause the following:
+ - Less dependencies in your controller
+ - Re-usable code
+ - Makes it easier to unit-test the results
+ - A handler is "allowed" to have an entity manager as opposing to your service (because you don't want to randomly call flush, it's expensive).
+ 
+In the examples provided below, you can see a controller and a handler that uses a parameter converter. If the pre-provided ```SimpleFormProvider``` isn't enough, you can always implement your own variant by using the ```FormProviderInterface```, both found in the component (the service definition itself is in the bundle).
 
 # Installation
 
