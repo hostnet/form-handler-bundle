@@ -12,7 +12,7 @@ In your composer.json
     }
 }
 ```
->*Note*: Recommend is to use the current stable tag.
+>*Note*: Recommended is to use the current stable tag.
 
 Then add the bundle in your AppKernel:
 ```php
