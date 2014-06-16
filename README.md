@@ -1,6 +1,16 @@
 form-handler-bundle
 ===================
-The form handler bundle is designed give extra support on the form handler component. This includes predefined services like the ```SimpleFormProvider``` and a handy ParamCoverter to easily inject your form handler into a controller.
+The form handler bundle is designed give extra support on the [form handler component](https://github.com/hostnet/form-handler-component). This includes predefined services like the ```SimpleFormProvider``` and a handy ParamCoverter to easily inject your form handler into a controller.
+
+This bundle wraps itself around the form-handler-component which in turn, wraps itself around a form. It provides a small interface that you can use to handle the forms by sending through the ```Request``` and ```FormInformationInterface```. This interface requires you to implement a few methods. By adding 2 more optional interfaces; ```FormFailureHandlerInterface``` and ```FormSuccessHandlerInterface```, you can move your success and failure branches away.
+
+Moving away your success and failure branches will cause the following:
+ - Less dependencies in your controller
+ - Re-usable code
+ - Makes it easier to unit-test the results
+ - A handler is "allowed" to have an entity manager as opposing to your service (because you don't want to randomly call flush, it's expensive).
+ 
+In the examples provided below, you can see a controller and a handler that uses a parameter converter. If the pre-provided ```SimpleFormProvider``` isn't enough, you can always implement your own variant by using the ```FormProviderInterface```, both found in the component (the service definition itself is in the bundle).
 
 # Installation
 
@@ -12,7 +22,7 @@ In your composer.json
     }
 }
 ```
->*Note*: Recommend is to use the current stable tag.
+>*Note*: Recommended is to use the current stable tag.
 
 Then add the bundle in your AppKernel:
 ```php
@@ -24,15 +34,16 @@ Then add the bundle in your AppKernel:
 
 # Usage
 
-In order to use the form handler, simply create a simple service that contains your form information. A simple example would be.
-
+In order to use the form handler, simply create a service that contains your form information. A simple example would be. 
 ```php
+use Hostnet\Component\Form\FormFailureHandlerInterface;
 use Hostnet\Component\Form\FormInformationInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class MyFormInformation implements FormInformationInterface, FormSuccesHandlerInterface
+class MyFormInformation implements FormInformationInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
     private $user;
@@ -74,7 +85,7 @@ class MyFormInformation implements FormInformationInterface, FormSuccesHandlerIn
         $this->form = $form;
     }
 
-    public function onSuccess()
+    public function onSuccess(Request $request)
     {
         // do something with the form data, like setting some data in the user
         $user->setUsername($this->data->getUsername());
@@ -82,8 +93,16 @@ class MyFormInformation implements FormInformationInterface, FormSuccesHandlerIn
         // ...
         return new RedirectResponse($this->router->generate("my-route"));
     }
+    
+    public function onFailure(Request $request)
+    {
+        // log the failed form post, or create a custom redirect.
+    }
 }
 ```
+>*Note*: Implementing the ``FormSuccesHandlerInterface`` and ``FormFailureHandlerInterface`` is optional and in most cases you will not need the ``FormFailureHandlerInterface`` since you will want to render the page again but with the form errors.
+
+
 Then create a service and tag it with form.handler
 ```yaml
 my_form.handler:
