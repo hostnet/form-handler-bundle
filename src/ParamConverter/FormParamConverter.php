@@ -21,24 +21,17 @@ class FormParamConverter implements ParamConverterInterface
     private $container;
 
     /**
-     * @var FormFactoryInterface
-     */
-    private $form_factory;
-
-    /**
      * @var array
      */
     private $handlers;
 
     /**
      * @param ContainerInterface   $container
-     * @param FormFactoryInterface $form_factory
      */
-    public function __construct(ContainerInterface $container, FormFactoryInterface $form_factory)
+    public function __construct(ContainerInterface $container)
     {
-        $this->container    = $container;
-        $this->form_factory = $form_factory;
-        $this->handlers     = [];
+        $this->container = $container;
+        $this->handlers  = [];
     }
 
     /**
@@ -65,15 +58,6 @@ class FormParamConverter implements ParamConverterInterface
         if (!$handler instanceof FormInformationInterface || get_class($handler) !== $class) {
             return;
         }
-
-        $form = $this->form_factory->create($handler->getType(), $handler->getData(), $handler->getOptions());
-
-        if (!$form instanceof FormInterface) {
-            throw new FormTypeNotFoundException($handler->getType());
-        }
-
-        // set the form which is associated with the handler
-        $handler->setForm($form);
 
         $request->attributes->set($configuration->getName(), $handler);
     }
