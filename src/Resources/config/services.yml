@@ -3,7 +3,6 @@ services:
         class: Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
         arguments:
             - "@service_container"
-            - "@form.factory"
         tags:
             - { name: request.param_converter, priority: false, converter: form_information_converter }
 
