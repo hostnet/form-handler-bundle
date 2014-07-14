@@ -1,13 +1,13 @@
 <?php
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
-use Hostnet\Component\Form\FormInformationInterface;
+use Hostnet\Component\Form\FormHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  */
-class InformationMock implements FormInformationInterface
+class HandlerMock implements FormHandlerInterface
 {
     public function getType()
     {

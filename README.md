@@ -2,7 +2,7 @@ form-handler-bundle
 ===================
 The form handler bundle is designed give extra support on the [form handler component](https://github.com/hostnet/form-handler-component). This includes predefined services like the ```SimpleFormProvider``` and a handy ParamConverter to easily inject your form handler into a controller.
 
-This bundle wraps itself around the form-handler-component which in turn, wraps itself around a form. It provides a small interface that you can use to handle the forms by sending through the ```Request``` and ```FormInformationInterface```. This interface requires you to implement a few methods. By adding 2 more optional interfaces; ```FormFailureHandlerInterface``` and ```FormSuccessHandlerInterface```, you can move your success and failure branches away.
+This bundle wraps itself around the form-handler-component which in turn, wraps itself around a form. It provides a small interface that you can use to handle the forms by sending through the ```Request``` and ```FormHandlerInterface```. This interface requires you to implement a few methods. By adding 2 more optional interfaces; ```FormFailureHandlerInterface``` and ```FormSuccessHandlerInterface```, you can move your success and failure branches away.
 
 Moving away your success and failure branches will cause the following:
  - Less dependencies in your controller
@@ -37,13 +37,13 @@ Then add the bundle in your AppKernel:
 In order to use the form handler, simply create a service that contains your form information. A simple example would be. 
 ```php
 use Hostnet\Component\Form\FormFailureHandlerInterface;
-use Hostnet\Component\Form\FormInformationInterface;
+use Hostnet\Component\Form\FormHandlerInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class MyFormInformation implements FormInformationInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
+class MyFormInformation implements FormHandlerInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
     private $user;

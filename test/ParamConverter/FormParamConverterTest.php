@@ -18,8 +18,8 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->container    = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $this->request      = new Request();
+        $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->request   = new Request();
     }
 
     /**
@@ -34,11 +34,11 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
         $converter     = new FormParamConverter($this->container);
         $this->assertFalse($converter->supports($configuration));
         $configuration = new ParamConverter([
-            'class'   => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock',
+            'class'   => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock',
             'options' => ['service_id' => 'test.henk']
         ]);
 
-        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock');
+        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock');
         $this->assertTrue($converter->supports($configuration));
 
         $converter->apply($this->request, $configuration);
@@ -54,15 +54,15 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = new ParamConverter([
-            'class'   => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock',
+            'class'   => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock',
             'options' => ['service_id' => 'test.henk'],
             'name'    => 'henk'
         ]);
 
-        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock');
+        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock');
         $this->assertTrue($converter->supports($configuration));
 
-        $handler = new InformationMock();
+        $handler = new HandlerMock();
 
         $this->container
             ->expects($this->once())
@@ -81,11 +81,11 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = new ParamConverter([
-            'class' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock',
+            'class' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock',
             'name'  => 'henk'
         ]);
 
-        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock');
+        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock');
         $converter->apply($this->request, $configuration);
     }
 
@@ -97,7 +97,7 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = new ParamConverter([
-            'class' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock',
+            'class' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock',
             'name'  => 'henk'
         ]);
 
@@ -112,13 +112,13 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = new ParamConverter([
-            'class' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock',
+            'class' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock',
             'name'  => 'henk'
         ]);
 
         // too many for 1 class to automatically determine the service id by class
-        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock');
-        $converter->addFormClass('test.hans', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\InformationMock');
+        $converter->addFormClass('test.henk', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock');
+        $converter->addFormClass('test.hans', 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock');
 
         $converter->apply($this->request, $configuration);
     }
