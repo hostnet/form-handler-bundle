@@ -129,9 +129,9 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param name  $class
+     * @param string  $class
      * @param array $options
-     * @param name  $name
+     * @param string  $name
      * @return \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter
      */
     private function buildParamConverter($class, array $options = [], $name = null)
