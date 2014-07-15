@@ -3,7 +3,6 @@ namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Yannick de Lange <ydelange@hostnet.nl>
@@ -21,9 +20,9 @@ class FormParamConverterCompilerPass implements CompilerPassInterface
         }
 
         $definition      = $container->getDefinition('form_handler.param_converter');
-        $tagged_services = $container->findTaggedServiceIds('form.handler');
+        $tagged_services = array_keys($container->findTaggedServiceIds('form.handler'));
 
-        foreach ($tagged_services as $id => $attributes) {
+        foreach ($tagged_services as $id) {
             $definition->addMethodCall('addFormClass', [$id, $container->getDefinition($id)->getClass()]);
         }
     }

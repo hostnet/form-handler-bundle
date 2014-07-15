@@ -2,7 +2,9 @@
 namespace Hostnet\Bundle\FormHandlerBundle;
 
 use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -16,6 +18,10 @@ class FormHandlerBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
+        // load default services.yml
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/Resources/config'));
+        $loader->load('services.yml');
+
         parent::build($container);
         $container->addCompilerPass(new FormParamConverterCompilerPass());
     }

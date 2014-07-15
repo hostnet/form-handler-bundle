@@ -1,12 +1,10 @@
 <?php
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
-use Hostnet\Component\Form\FormInformationInterface;
+use Hostnet\Component\Form\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -55,7 +53,7 @@ class FormParamConverter implements ParamConverterInterface
         $handler    = $this->container->get($service_id);
         $class      = $this->handlers[$service_id];
 
-        if (!$handler instanceof FormInformationInterface || get_class($handler) !== $class) {
+        if (!$handler instanceof FormHandlerInterface || get_class($handler) !== $class) {
             return;
         }
 
