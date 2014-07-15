@@ -43,7 +43,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class MyFormInformation implements FormHandlerInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
+class MyFormHandler implements FormHandlerInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
     private $user;
@@ -106,7 +106,7 @@ class MyFormInformation implements FormHandlerInterface, FormSuccesHandlerInterf
 Then create a service and tag it with form.handler
 ```yaml
 my_form.handler:
-    class: MyFormInformation
+    class: MyFormHandler
     arguments:
         - "@router"
     tags:
@@ -131,9 +131,9 @@ class MyController
      * @Template()
     */
     public function formAction(
-        Request $request, 
-        MyFormInformation $handler,
-        MyEntityUser $user
+        Request       $request,
+        MyFormHandler $handler,
+        MyEntityUser  $user
     ) {
         // you have 100% control over you handler, so you can
         // create setters that allow you to "inject" more things
