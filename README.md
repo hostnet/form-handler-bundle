@@ -9,7 +9,7 @@ Moving away your success and failure branches will cause the following:
  - Re-usable code
  - Makes it easier to unit-test the results
  - A handler is "allowed" to have an entity manager as opposing to your service (because you don't want to randomly call flush, it's expensive).
- 
+
 In the examples provided below, you can see a controller and a handler that uses a parameter converter. If the pre-provided ```SimpleFormProvider``` isn't enough, you can always implement your own variant by using the ```FormProviderInterface```, both found in the component (the service definition itself is in the bundle).
 
 # Installation
@@ -34,11 +34,12 @@ Then add the bundle in your AppKernel:
 
 # Usage
 
-In order to use the form handler, simply create a service that contains your form information. A simple example would be. 
+In order to use the form handler, simply create a service that contains your form information. A simple example would be:
 ```php
 use Hostnet\Component\Form\FormFailureHandlerInterface;
 use Hostnet\Component\Form\FormHandlerInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -46,8 +47,9 @@ use Symfony\Component\Routing\RouterInterface;
 class MyFormHandler implements FormHandlerInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
-    private $user;
+    private $form;
     private $router;
+    private $user;
 
     public function __construct(RouterInterface $router)
     {
@@ -69,17 +71,17 @@ class MyFormHandler implements FormHandlerInterface, FormSuccesHandlerInterface,
     {
         return $this->data;
     }
-    
+
     public function getOptions()
     {
         return [];
     }
-    
+
     public function getForm()
     {
         return $this->form;
     }
-    
+
     public function setForm(FormInterface $form)
     {
         $this->form = $form;
@@ -89,11 +91,11 @@ class MyFormHandler implements FormHandlerInterface, FormSuccesHandlerInterface,
     {
         // do something with the form data, like setting some data in the user
         $user->setUsername($this->data->getUsername());
-        
+
         // ...
         return new RedirectResponse($this->router->generate("my-route"));
     }
-    
+
     public function onFailure(Request $request)
     {
         // log the failed form post, or create a custom redirect.
