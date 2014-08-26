@@ -38,6 +38,7 @@ In order to use the form handler, simply create a service that contains your for
 ```php
 use Hostnet\Component\Form\FormFailureHandlerInterface;
 use Hostnet\Component\Form\FormHandlerInterface;
+use Symfony\Component\Form\FormInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
