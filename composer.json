@@ -1,7 +1,7 @@
 {
-    "name":        "hostnet/form-handler-bundle",
-    "description": "Hostnet form handler to provide an easier way of handling forms in actions",
-    "license":     "MIT",
+    "name":              "hostnet/form-handler-bundle",
+    "description":       "Hostnet form handler to provide an easier way of handling forms in actions",
+    "license":           "MIT",
     "authors": [
         {
             "name":  "Iltar van der Berg",
@@ -12,29 +12,25 @@
             "email": "ydelange@hostnet.nl"
         }
     ],
-
     "require": {
-        "php"                           : ">=5.4",
-        "sensio/framework-extra-bundle" : "3.*",
-        "symfony/http-foundation"       : "2.*, >=2.3",
-        "hostnet/form-handler-component": "1.*"
+        "php":                            "^5.5|^7.0",
+        "hostnet/form-handler-component": "^1.2.0",
+        "sensio/framework-extra-bundle":  "3.*",
+        "symfony/expression-language":    "^2.7|^3.0",
+        "symfony/http-foundation":        "^2.7|^3.0"
     },
-
     "require-dev": {
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "^4.7|^5.0"
     },
-
     "minimum-stability": "stable",
-
     "autoload": {
-        "psr-4" : {
-            "Hostnet\\Bundle\\FormHandlerBundle\\" : "src/"
+        "psr-4": {
+            "Hostnet\\Bundle\\FormHandlerBundle\\": "src/"
         }
     },
-
     "autoload-dev": {
-        "psr-4" : {
-            "Hostnet\\Bundle\\FormHandlerBundle\\" : "test/"
+        "psr-4": {
+            "Hostnet\\Bundle\\FormHandlerBundle\\": "test/"
         }
     }
 }
