@@ -1,8 +1,10 @@
 form-handler-bundle
 ===================
-The form handler bundle is designed give extra support on the [form handler component](https://github.com/hostnet/form-handler-component). This includes predefined services like the ```SimpleFormProvider``` and a handy ParamConverter to easily inject your form handler into a controller.
+The form handler bundle is designed give extra support on the [form handler component](https://github.com/hostnet/form-handler-component). This includes predefined services like the `SimpleFormProvider` and a handy `ParamConverter` to easily inject your form handler into a controller.
 
-This bundle wraps itself around the form-handler-component which in turn, wraps itself around a form. It provides a small interface that you can use to handle the forms by sending through the ```Request``` and ```FormHandlerInterface```. This interface requires you to implement a few methods. By adding 2 more optional interfaces; ```FormFailureHandlerInterface``` and ```FormSuccessHandlerInterface```, you can move your success and failure branches away.
+This bundle wraps itself around the `form-handler-component` which in turn, wraps itself around a form. It provides a small interface that you can use to handle the forms by sending through the `Request` and `FormHandlerInterface`. This interface requires you to implement a few methods. By adding 2 more optional interfaces; `FormFailureHandlerInterface` and `FormSuccessHandlerInterface`, you can move your success and failure branches away from the controller and into the form handler.
+
+To reduce the amount of code needed there is also an `AbstractFormHandler` which provides most of the common code found in all form handlers. This implements the `FormHandlerInterface`, so you only need to implement the methods for your form.
 
 Moving away your success and failure branches will cause the following:
  - Less dependencies in your controller
@@ -10,7 +12,7 @@ Moving away your success and failure branches will cause the following:
  - Makes it easier to unit-test the results
  - A handler is "allowed" to have an entity manager as opposing to your service (because you don't want to randomly call flush, it's expensive).
 
-In the examples provided below, you can see a controller and a handler that uses a parameter converter. If the pre-provided ```SimpleFormProvider``` isn't enough, you can always implement your own variant by using the ```FormProviderInterface```, both found in the component (the service definition itself is in the bundle).
+In the examples provided below, you can see a controller and a handler that uses a parameter converter. If the pre-provided `SimpleFormProvider` isn't enough, you can always implement your own variant by using the `FormProviderInterface`, both found in the component (the service definition itself is in the bundle).
 
 # Installation
 
@@ -36,57 +38,44 @@ Then add the bundle in your AppKernel:
 
 In order to use the form handler, simply create a service that contains your form information. A simple example would be:
 ```php
+use Hostnet\Component\Form\AbstractFormHandler;
 use Hostnet\Component\Form\FormFailureHandlerInterface;
-use Hostnet\Component\Form\FormHandlerInterface;
 use Hostnet\Component\Form\FormSuccesHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class MyFormHandler implements FormHandlerInterface, FormSuccesHandlerInterface, FormFailureHandlerInterface
+class MyFormHandler extends AbstractFormHandler implements FormSuccesHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
-    private $form;
     private $router;
     private $user;
 
     public function __construct(RouterInterface $router)
     {
-        $this->data   = new MyFormData();
         $this->router = $router;
+        $this->data   = new MyFormData();
     }
 
+    /** {@inheritdoc} */
+    public function getType()
+    {
+        return MyFormType::class;
+    }
+
+    /** {@inheritdoc} */
+    public function getData()
+    {
+        return $this->data;
+    }
+    
     public function setUser(MyEntityUser $user)
     {
         $this->user = $user;
     }
 
-    public function getType()
-    {
-        return 'my_form'; // form.type alias, as tagged in your services.yml
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function getOptions()
-    {
-        return [];
-    }
-
-    public function getForm()
-    {
-        return $this->form;
-    }
-
-    public function setForm(FormInterface $form)
-    {
-        $this->form = $form;
-    }
-
+    /** {@inheritdoc} */
     public function onSuccess(Request $request)
     {
         // do something with the form data, like setting some data in the user
@@ -96,13 +85,15 @@ class MyFormHandler implements FormHandlerInterface, FormSuccesHandlerInterface,
         return new RedirectResponse($this->router->generate("my-route"));
     }
 
+    /** {@inheritdoc} */
     public function onFailure(Request $request)
     {
         // log the failed form post, or create a custom redirect.
     }
 }
 ```
->*Note*: Implementing the ``FormSuccesHandlerInterface`` and ``FormFailureHandlerInterface`` is optional and in most cases you will not need the ``FormFailureHandlerInterface`` since you will want to render the page again but with the form errors.
+
+>*Note*: Implementing the `FormSuccesHandlerInterface` and `FormFailureHandlerInterface` is optional and in most cases you will not need the `FormFailureHandlerInterface` since you will want to render the page again but with the form errors.
 
 
 Then create a service and tag it with form.handler
@@ -114,6 +105,7 @@ my_form.handler:
     tags:
         - { name: form.handler }
 ```
+
 And in your controller you can use the handler like:
 ```php
 class MyController
@@ -150,6 +142,7 @@ class MyController
     }
 }
 ```
+
 The parameter converter will fetch the correct service with the class based on the tagged services.
 
 >*Note*: You cannot have multiple form handler services that use the same class, since the parameter converter cannot find the correct service for it.
