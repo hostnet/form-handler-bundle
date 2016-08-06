@@ -62,13 +62,13 @@ In order to use the form handler, simply create a service that contains your for
 ```php
 use Hostnet\Component\Form\AbstractFormHandler;
 use Hostnet\Component\Form\FormFailureHandlerInterface;
-use Hostnet\Component\Form\FormSuccesHandlerInterface;
+use Hostnet\Component\Form\FormSuccessHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-class MyFormHandler extends AbstractFormHandler implements FormSuccesHandlerInterface, FormFailureHandlerInterface
+class MyFormHandler extends AbstractFormHandler implements FormSuccessHandlerInterface, FormFailureHandlerInterface
 {
     private $data;
     private $router;
@@ -115,7 +115,7 @@ class MyFormHandler extends AbstractFormHandler implements FormSuccesHandlerInte
 }
 ```
 
->*Note*: Implementing the `FormSuccesHandlerInterface` and `FormFailureHandlerInterface` is optional and in most cases you will not need the `FormFailureHandlerInterface` since you will want to render the page again but with the form errors.
+>*Note*: Implementing the `FormSuccessHandlerInterface` and `FormFailureHandlerInterface` is optional and in most cases you will not need the `FormFailureHandlerInterface` since you will want to render the page again but with the form errors.
 
 
 Then create a service and tag it with form.handler
