@@ -4,7 +4,7 @@ services:
         arguments:
             - "@service_container"
         tags:
-            - { name: request.param_converter, priority: false, converter: form_information_converter }
+            - { name: request.param_converter, converter: form_information_converter }
 
     form_handler.provider.simple:
         class: Hostnet\Component\Form\Simple\SimpleFormProvider
