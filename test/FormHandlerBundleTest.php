@@ -18,7 +18,9 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
 
     private $expected_service_definitions = [
         'form_handler.param_converter',
-        'form_handler.provider.simple'
+        'form_handler.provider.simple',
+        'hostnet.form_handler.registry',
+        'hostnet.form_handler.factory',
     ];
 
     /**

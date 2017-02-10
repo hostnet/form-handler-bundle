@@ -41,6 +41,7 @@ class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
     {
         $container = new ContainerBuilder();
         $container->setDefinition('form_handler.param_converter', new Definition());
+        $container->setDefinition('hostnet.form_handler.registry', new Definition(null, [null, null]));
 
         foreach ($tagged_services as $id => $tag) {
             $container->register($id)->addTag($tag, ['tests']);

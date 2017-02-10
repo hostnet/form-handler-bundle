@@ -21,9 +21,16 @@ class FormParamConverterCompilerPass implements CompilerPassInterface
 
         $definition      = $container->getDefinition('form_handler.param_converter');
         $tagged_services = array_keys($container->findTaggedServiceIds('form.handler'));
+        $handlers        = [];
 
         foreach ($tagged_services as $id) {
-            $definition->addMethodCall('addFormClass', [$id, $container->getDefinition($id)->getClass()]);
+            $class      = $container->getDefinition($id)->getClass();
+            $handlers[] = [$id, $class];
+
+            $definition->addMethodCall('addFormClass', [$id, $class]);
         }
+
+        // Add handlers to registry
+        $container->getDefinition('hostnet.form_handler.registry')->replaceArgument(1, $handlers);
     }
 }

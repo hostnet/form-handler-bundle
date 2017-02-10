@@ -3,6 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.0/phpunit.xsd"
     colors="true" bootstrap="vendor/autoload.php">
+
+    <php>
+        <server name="KERNEL_DIR" value="test/Functional/Fixtures"/>
+    </php>
+
     <testsuites>
         <testsuite name="hostnet/form-handler-bundle test suite">
             <directory>./test</directory>
