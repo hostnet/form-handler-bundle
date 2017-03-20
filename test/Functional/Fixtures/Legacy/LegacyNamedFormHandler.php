@@ -1,0 +1,45 @@
+<?php
+namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy;
+
+use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestData;
+use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestType;
+use Hostnet\Component\Form\AbstractFormHandler;
+use Hostnet\Component\Form\FormFailureHandlerInterface;
+use Hostnet\Component\Form\FormSuccessHandlerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class LegacyNamedFormHandler extends AbstractFormHandler implements FormSuccessHandlerInterface, FormFailureHandlerInterface
+{
+    private $data;
+
+    public function __construct()
+    {
+        $this->data = new TestData();
+    }
+
+    public function getType()
+    {
+        return TestType::class;
+    }
+
+    public function getName()
+    {
+        return 'foobar';
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function onSuccess(Request $request)
+    {
+        return new RedirectResponse('http://success.nl/' . $this->data->test);
+    }
+
+    public function onFailure(Request $request)
+    {
+        return new RedirectResponse('http://failure.nl/' . $this->data->test);
+    }
+}

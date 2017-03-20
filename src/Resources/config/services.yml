@@ -10,3 +10,15 @@ services:
         class: Hostnet\Component\Form\Simple\SimpleFormProvider
         arguments:
             - "@form.factory"
+
+    hostnet.form_handler.registry:
+        class: Hostnet\Bundle\FormHandlerBundle\Registry\LegacyHandlerRegistry
+        arguments:
+            - "@service_container"
+            - [] # injected from the compiler pass
+
+    hostnet.form_handler.factory:
+        class: Hostnet\Component\FormHandler\HandlerFactory
+        arguments:
+            - "@form.factory"
+            - "@hostnet.form_handler.registry"

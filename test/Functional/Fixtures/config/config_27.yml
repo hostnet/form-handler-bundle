@@ -1,0 +1,14 @@
+imports:
+    - { resource: config.yml }
+
+services:
+    # added to test support for symfony 2.7
+    app.handler.type.full_27_form:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler27
+        tags:
+            - { name: form.handler }
+
+    app.type.test:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestType27
+        tags:
+            - { name: form.type, alias: test }
