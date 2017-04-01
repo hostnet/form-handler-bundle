@@ -45,6 +45,10 @@ Documentation
  * The [legacy documentation for 1.3](https://github.com/hostnet/form-handler-bundle/wiki/Legacy-Readme)
    is still available but upgrading is recommended.
 
+License
+-------------
+The `hostnet/form-handler-bundle` is licensed under the [MIT License](https://github.com/hostnet/form-handler-bundle/blob/master/LICENSE), meaning you can reuse the code within proprietary software provided that all copies of the licensed software include a copy of the MIT License terms and the copyright notice.
+
 Get in touch
 ------------
  * Our primary contact channel is via IRC: [freenode.net#symfony](http://webchat.freenode.net/?channels=%23hostnet).
