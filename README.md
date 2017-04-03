@@ -41,8 +41,8 @@ Installation
 Documentation
 -------------
  * You can find the full documentation on our [github wiki pages](https://github.com/hostnet/form-handler-bundle/wiki).
- * If you are migrating from 1.3 to 1.4 or 2.x, check the [migration guide](https://github.com/hostnet/form-handler-bundle/wiki/Migration-towards-2.x).
- * The [legacy documentation for 1.3](https://github.com/hostnet/form-handler-bundle/wiki/Legacy-Readme)
+ * If you are migrating from 1.1 to 1.2 or 2.x, check the [migration guide](https://github.com/hostnet/form-handler-bundle/wiki/Migration-towards-2.x).
+ * The [legacy documentation for 1.1](https://github.com/hostnet/form-handler-bundle/wiki/Legacy-Readme)
    is still available but upgrading is recommended.
 
 License
