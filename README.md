@@ -36,10 +36,11 @@ Installation
 ------------
  * Read the [installation guide](https://github.com/hostnet/form-handler-bundle/wiki/Installation)
    when using composer.
- * Get started with the [quick start](https://github.com/hostnet/form-handler-bundle/wiki/Quick-start).
+ * This bundle (and its component) follows the [semantic versioning](http://semver.org/) strictly.
 
 Documentation
 -------------
+ * Read the [Getting Started guide](https://github.com/hostnet/form-handler-bundle/wiki/Getting-Started-With-Form-Handlers) if you are new to form handlers.
  * You can find the full documentation on our [github wiki pages](https://github.com/hostnet/form-handler-bundle/wiki).
  * If you are migrating from 1.1 to 1.2 or 2.x, check the [migration guide](https://github.com/hostnet/form-handler-bundle/wiki/Migration-towards-2.x).
  * The [legacy documentation for 1.1](https://github.com/hostnet/form-handler-bundle/wiki/Legacy-Readme)
@@ -51,7 +52,7 @@ The `hostnet/form-handler-bundle` is licensed under the [MIT License](https://gi
 
 Get in touch
 ------------
- * Our primary contact channel is via IRC: [freenode.net#symfony](http://webchat.freenode.net/?channels=%23hostnet).
+ * Our primary contact channel is via IRC: [freenode.net#hostnet](http://webchat.freenode.net/?channels=%23hostnet).
  * We are available on the [symfony-devs](https://slackinvite.me/to/symfony-devs)
    slack server in [#hostnet-form-handlers](https://symfony-devs.slack.com/messages/C3SJH42QP).
  * Or via our email: opensource@hostnet.nl.
