@@ -36,7 +36,7 @@ Installation
 ------------
  * Read the [installation guide](https://github.com/hostnet/form-handler-bundle/wiki/Installation)
    when using composer.
- * This bundle (and its component) follows the [semantic versioning](http://semver.org/) strictly.
+ * This bundle and the component follow [semantic versioning](http://semver.org/) strictly.
 
 Documentation
 -------------
