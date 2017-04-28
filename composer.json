@@ -1,5 +1,6 @@
 {
     "name":        "hostnet/form-handler-bundle",
+    "type":        "symfony-bundle",
     "description": "Hostnet form handler to provide an easier way of handling forms in actions",
     "license":     "MIT",
     "authors": [
@@ -21,11 +22,11 @@
     },
     "require-dev": {
         "phpunit/phpunit":          "^4.7|^5.0",
-        "symfony/phpunit-bridge":   "^2.8|^3.0",
         "symfony/finder":           "^2.7|^3.0",
         "symfony/form":             "^2.7|^3.0",
         "symfony/framework-bundle": "^2.7|^3.0",
         "symfony/http-kernel":      "^2.7|^3.0",
+        "symfony/phpunit-bridge":   "^2.8|^3.0",
         "symfony/translation":      "^2.7|^3.0",
         "symfony/validator":        "^2.7|^3.0"
     },
