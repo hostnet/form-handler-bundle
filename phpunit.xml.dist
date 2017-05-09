@@ -8,6 +8,10 @@
         <server name="KERNEL_DIR" value="test/Functional/Fixtures"/>
     </php>
 
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
+
     <testsuites>
         <testsuite name="hostnet/form-handler-bundle test suite">
             <directory>./test</directory>
