@@ -5,8 +5,10 @@ sudo: false
 cache:
   directories:
     - "$HOME/.composer/cache/files"
+    - $HOME/symfony-bridge/.phpunit
 
 env:
+  - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
   - COMPOSER_FLAGS="--prefer-stable"
 
 php:
@@ -26,6 +28,8 @@ matrix:
 
 before_install: if [[ "$SYMFONY_VERSION" != "" ]]; then composer require --no-update symfony/symfony:${SYMFONY_VERSION}; fi
 
-install: composer update $COMPOSER_FLAGS --prefer-dist
+install:
+  - composer update $COMPOSER_FLAGS --prefer-dist
+  - vendor/bin/simple-phpunit install
 
-script: vendor/bin/phpunit
+script: vendor/bin/simple-phpunit
