@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- * @coversDefaultClass Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle
+ * @covers \Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle
  */
 class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,9 +26,6 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
         'hostnet.form_handler.factory',
     ];
 
-    /**
-     * @covers ::build
-     */
     public function testBuild()
     {
         $container = new ContainerBuilder();
@@ -41,7 +38,6 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::build
      * @dataProvider loadedResourcesProvider
      */
     public function testLoadedResources(BundleInterface $bundle, array $expected_resources)
@@ -75,9 +71,6 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($expected_resources, 'Container resource(s) missing: ' . implode(',', $expected_resources));
     }
 
-    /**
-     * @return array
-     */
     public function loadedResourcesProvider()
     {
         return [
@@ -86,7 +79,6 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::build
      * @dataProvider loadedServicesProvider
      */
     public function testLoadedServices(BundleInterface $bundle, array $expected_service_definitions)
@@ -129,9 +121,6 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @return array
-     */
     public function loadedServicesProvider()
     {
         return [
