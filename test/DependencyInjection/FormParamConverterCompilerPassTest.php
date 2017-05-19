@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -6,13 +9,10 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- * @coversDefaultClass Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass
+ * @covers \Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass
  */
 class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers ::process
-     */
     public function testProcessNoDef()
     {
         $container = $this
@@ -34,7 +34,6 @@ class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::process
      * @dataProvider processDataProvider
      */
     public function testProcess($tagged_services)
@@ -51,9 +50,6 @@ class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
         $pass->process($container);
     }
 
-    /**
-     * @return array
-     */
     public function processDataProvider()
     {
         return [

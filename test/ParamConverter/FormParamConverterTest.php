@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -6,28 +9,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- * @coversDefaultClass Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
+ * @covers \Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
  */
 class FormParamConverterTest extends \PHPUnit_Framework_TestCase
 {
     private $container;
     private $request;
 
-    /**
-     * @see PHPUnit_Framework_TestCase::setUp()
-     */
-    public function setUp()
+    protected function setUp()
     {
         $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerInterface')->getMock();
         $this->request   = new Request();
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::apply
-     * @covers ::supports
-     * @covers ::addFormClass
-     */
     public function testApplyFromServiceIdHandlerNotFound()
     {
         $configuration = new ParamConverter(['class' => 'Test\Henk', 'options' => ['service_id' => 'test.henk']]);
@@ -45,12 +39,6 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
         $converter->apply($this->request, $configuration);
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::apply
-     * @covers ::supports
-     * @covers ::addFormClass
-     */
     public function testApplyFromServiceId()
     {
         $converter     = new FormParamConverter($this->container);
@@ -75,9 +63,6 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($handler, $this->request->attributes->get('henk'));
     }
 
-    /**
-     * @covers ::getServiceIdForClassName
-     */
     public function testGetServiceIdForClassName()
     {
         $converter     = new FormParamConverter($this->container);
@@ -92,7 +77,6 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getServiceIdForClassName
      * @expectedException \InvalidArgumentException
      */
     public function testGetServiceIdForClassNameNoMatch()
@@ -108,7 +92,6 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::getServiceIdForClassName
      * @expectedException \InvalidArgumentException
      */
     public function testGetServiceIdForClassNameTooManyClassesForOneService()
@@ -128,12 +111,6 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
         $converter->apply($this->request, $configuration);
     }
 
-    /**
-     * @param string  $class
-     * @param array $options
-     * @param string  $name
-     * @return \Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter
-     */
     private function buildParamConverter($class, array $options = [], $name = null)
     {
         return  new ParamConverter([

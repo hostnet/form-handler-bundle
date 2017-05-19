@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestData;

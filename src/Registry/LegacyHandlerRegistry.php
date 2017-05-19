@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle\Registry;
 
 use Hostnet\Component\Form\FormHandlerInterface;
@@ -21,7 +24,7 @@ final class LegacyHandlerRegistry implements HandlerRegistryInterface
 
     public function __construct(ContainerInterface $container, array $handlers)
     {
-        $this->handlers = $handlers;
+        $this->handlers  = $handlers;
         $this->container = $container;
     }
 
