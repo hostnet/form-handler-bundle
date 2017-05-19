@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
@@ -34,7 +37,7 @@ class HandlerTest extends KernelTestCase
         $request         = Request::create('/', 'POST', ['test' => ['test' => 'foobar']]);
 
         $handler = $handler_factory->create(FullFormHandler::class);
-        $data = new TestData();
+        $data    = new TestData();
 
         $response = $handler->handle($request, $data);
 
@@ -53,7 +56,7 @@ class HandlerTest extends KernelTestCase
         $request         = Request::create('/', 'POST', ['test' => ['test' => null]]);
 
         $handler = $handler_factory->create(FullFormHandler::class);
-        $data = new TestData();
+        $data    = new TestData();
 
         $response = $handler->handle($request, $data);
 
@@ -75,7 +78,7 @@ class HandlerTest extends KernelTestCase
         $request         = Request::create('/', 'POST', ['test' => ['test' => 'foobar']]);
 
         $handler = $handler_factory->create(FullFormHandler27::class);
-        $data = new TestData();
+        $data    = new TestData();
 
         $response = $handler->handle($request, $data);
 
@@ -97,7 +100,7 @@ class HandlerTest extends KernelTestCase
         $request         = Request::create('/', 'POST', ['test' => ['test' => null]]);
 
         $handler = $handler_factory->create(FullFormHandler27::class);
-        $data = new TestData();
+        $data    = new TestData();
 
         $response = $handler->handle($request, $data);
 

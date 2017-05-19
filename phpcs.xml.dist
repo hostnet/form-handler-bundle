@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="form-handler-bundle">
+    <!-- Kernel does not have a namespace -->
+    <exclude-pattern>test/Functional/Fixtures/TestKernel.php</exclude-pattern>
+
+    <!-- Use the Hostnet code conventions -->
+    <rule ref="Hostnet" />
+</ruleset>

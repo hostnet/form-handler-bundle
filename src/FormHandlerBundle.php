@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2014-2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle;
 
 use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass;

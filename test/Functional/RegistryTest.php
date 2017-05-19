@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
@@ -21,7 +24,7 @@ class RegistryTest extends KernelTestCase
     public function test()
     {
         $container = self::$kernel->getContainer();
-        $registry = $container->get('hostnet.form_handler.registry');
+        $registry  = $container->get('hostnet.form_handler.registry');
 
         self::assertSame(
             $container->get('app.handler.type.full_form'),
@@ -53,7 +56,7 @@ class RegistryTest extends KernelTestCase
     public function testMissing()
     {
         $container = self::$kernel->getContainer();
-        $registry = $container->get('hostnet.form_handler.registry');
+        $registry  = $container->get('hostnet.form_handler.registry');
 
         $registry->getType(\stdClass::class);
     }
@@ -64,7 +67,7 @@ class RegistryTest extends KernelTestCase
     public function testNotTagged()
     {
         $container = self::$kernel->getContainer();
-        $registry = $container->get('hostnet.form_handler.registry');
+        $registry  = $container->get('hostnet.form_handler.registry');
 
         $registry->getType(SimpleNotTaggedFormHandler::class);
     }

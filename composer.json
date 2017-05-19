@@ -21,6 +21,7 @@
         "symfony/http-foundation":        "^2.7|^3.0"
     },
     "require-dev": {
+        "hostnet/phpcs-tool":       "^4.1.0",
         "phpunit/phpunit":          "^4.7|^5.0",
         "symfony/finder":           "^2.7|^3.0",
         "symfony/form":             "^2.7|^3.0",
@@ -41,5 +42,10 @@
         }
     },
     "minimum-stability" : "dev",
-    "prefer-stable"     : true
+    "prefer-stable"     : true,
+    "archive": {
+        "exclude": [
+            "/test"
+        ]
+    }
 }

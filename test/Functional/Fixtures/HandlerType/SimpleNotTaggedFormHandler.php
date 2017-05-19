@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestType;
