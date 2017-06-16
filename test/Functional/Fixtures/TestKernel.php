@@ -12,7 +12,7 @@ class TestKernel extends Kernel
     {
         return array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle(),
+            new Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle(),
         );
     }
 

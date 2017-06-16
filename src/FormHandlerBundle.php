@@ -3,29 +3,29 @@
  * @copyright 2014-2017 Hostnet B.V.
  */
 namespace Hostnet\Bundle\FormHandlerBundle;
-
-use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Yannick de Lange <ydelange@hostnet.nl>
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
+ *
+ * @deprecated The FormHandlerBundle is deprecated. Use Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle instead.
  */
-class FormHandlerBundle extends Bundle
+class FormHandlerBundle extends HostnetFormHandlerBundle
 {
     /**
-     * @see \Symfony\Component\HttpKernel\Bundle\Bundle::build()
+     * @param ContainerBuilder $container
      */
     public function build(ContainerBuilder $container)
     {
-        // load default services.yml
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/Resources/config'));
-        $loader->load('services.yml');
-
+        @trigger_error(
+            sprintf(
+                'The %s class is deprecated. Use the %s class instead.',
+                FormHandlerBundle::class,
+                HostnetFormHandlerBundle::class
+            ),
+            E_USER_DEPRECATED
+        );
         parent::build($container);
-        $container->addCompilerPass(new FormParamConverterCompilerPass());
     }
 }
