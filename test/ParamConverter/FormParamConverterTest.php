@@ -18,6 +18,13 @@ class FormParamConverterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        if (!interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')) {
+            $this->markTestSkipped(
+              'Sensio Extra bundle is not installed.'
+            );
+            return;
+        }
+
         $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerInterface')->getMock();
         $this->request   = new Request();
     }

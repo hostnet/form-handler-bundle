@@ -1,7 +1,7 @@
 <?php
 namespace Hostnet\Bundle\FormHandlerBundle;
 
-use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass;
+use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -23,6 +23,6 @@ class HostnetFormHandlerBundle extends Bundle
         $loader->load('services.yml');
 
         parent::build($container);
-        $container->addCompilerPass(new FormParamConverterCompilerPass());
+        $container->addCompilerPass(new FormHandlerRegistryCompilerPass());
     }
 }

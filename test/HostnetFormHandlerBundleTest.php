@@ -1,7 +1,7 @@
 <?php
 namespace Hostnet\Bundle\FormHandlerBundle;
 
-use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass;
+use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -20,7 +20,7 @@ class HostnetFormHandlerBundleTest extends \PHPUnit_Framework_TestCase
         $found = false;
 
         foreach ($container->getCompilerPassConfig()->getBeforeOptimizationPasses() as $pass) {
-            if (!$pass instanceof FormParamConverterCompilerPass) {
+            if (!$pass instanceof FormHandlerRegistryCompilerPass) {
                 continue;
             }
 
