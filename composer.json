@@ -16,20 +16,24 @@
     "require": {
         "php":                            "^5.6|^7.0",
         "hostnet/form-handler-component": "^1.4.0",
-        "sensio/framework-extra-bundle":  "3.*",
         "symfony/expression-language":    "^2.7|^3.0",
         "symfony/http-foundation":        "^2.7|^3.0"
     },
     "require-dev": {
-        "hostnet/phpcs-tool":       "^4.1.0",
-        "phpunit/phpunit":          "^4.7|^5.0",
-        "symfony/finder":           "^2.7|^3.0",
-        "symfony/form":             "^2.7|^3.0",
-        "symfony/framework-bundle": "^2.7|^3.0",
-        "symfony/http-kernel":      "^2.7|^3.0",
-        "symfony/phpunit-bridge":   "^2.8|^3.0",
-        "symfony/translation":      "^2.7|^3.0",
-        "symfony/validator":        "^2.7|^3.0"
+        "doctrine/annotations":          "^1.0",
+        "hostnet/phpcs-tool":            "^4.1.0",
+        "phpunit/phpunit":               "^4.7|^5.0",
+        "sensio/framework-extra-bundle": "3.*",
+        "symfony/finder":                "^2.7|^3.0",
+        "symfony/form":                  "^2.7|^3.0",
+        "symfony/framework-bundle":      "^2.7|^3.0",
+        "symfony/http-kernel":           "^2.7|^3.0",
+        "symfony/phpunit-bridge":        "^2.8|^3.0",
+        "symfony/translation":           "^2.7|^3.0",
+        "symfony/validator":             "^2.7|^3.0"
+    },
+    "suggest": {
+        "sensio/framework-extra-bundle": "To utilize form param converter."
     },
     "autoload": {
         "psr-4": {

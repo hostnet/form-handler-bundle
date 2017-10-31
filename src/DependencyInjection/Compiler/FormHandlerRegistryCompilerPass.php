@@ -11,18 +11,21 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Yannick de Lange <ydelange@hostnet.nl>
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  */
-class FormParamConverterCompilerPass implements CompilerPassInterface
+class FormHandlerRegistryCompilerPass implements CompilerPassInterface
 {
     /**
      * @see \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface::process()
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('form_handler.param_converter')) {
-            return;
+        $registerWithParamConverter = false;
+
+        if (interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface') &&
+            $container->hasDefinition('form_handler.param_converter')) {
+            $definition = $container->getDefinition('form_handler.param_converter');
+            $registerWithParamConverter = true;
         }
 
-        $definition      = $container->getDefinition('form_handler.param_converter');
         $tagged_services = array_keys($container->findTaggedServiceIds('form.handler'));
         $handlers        = [];
 
@@ -30,7 +33,9 @@ class FormParamConverterCompilerPass implements CompilerPassInterface
             $class      = $container->getDefinition($id)->getClass();
             $handlers[] = [$id, $class];
 
-            $definition->addMethodCall('addFormClass', [$id, $class]);
+            if ($registerWithParamConverter) {
+                $definition->addMethodCall('addFormClass', [$id, $class]);
+            }
         }
 
         // Add handlers to registry

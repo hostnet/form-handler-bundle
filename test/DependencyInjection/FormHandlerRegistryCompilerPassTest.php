@@ -9,28 +9,17 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- * @covers \Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormParamConverterCompilerPass
+ * @covers \Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass
  */
-class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
+class FormHandlerRegistryCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
-    public function testProcessNoDef()
+    protected function setUp()
     {
-        $container = $this
-            ->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $container
-            ->expects($this->once())
-            ->method('hasDefinition')
-            ->will($this->returnValue(false));
-
-        $container
-            ->expects($this->never())
-            ->method('getDefinition');
-
-        $pass = new FormParamConverterCompilerPass();
-        $pass->process($container);
+        if (!interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')) {
+            $this->markTestSkipped(
+              'Sensio Extra bundle is not installed.'
+            );
+        }
     }
 
     /**
@@ -46,7 +35,7 @@ class FormParamConverterCompilerPassTest extends \PHPUnit_Framework_TestCase
             $container->register($id)->addTag($tag, ['tests']);
         }
 
-        $pass = new FormParamConverterCompilerPass();
+        $pass = new FormHandlerRegistryCompilerPass();
         $pass->process($container);
     }
 
