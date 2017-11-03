@@ -30,7 +30,7 @@ class FormHandlerRegistryCompilerPass implements CompilerPassInterface
         $handlers        = [];
 
         foreach ($tagged_services as $id) {
-            $class      = $container->getDefinition($id)->getClass();
+            $class      = $container->getDefinition($id)->setPublic(true)->getClass();
             $handlers[] = [$id, $class];
 
             if ($registerWithParamConverter) {
