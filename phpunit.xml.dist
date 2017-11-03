@@ -6,6 +6,7 @@
 
     <php>
         <server name="KERNEL_DIR" value="test/Functional/Fixtures"/>
+        <server name="KERNEL_CLASS" value="TestKernel"/>
     </php>
 
     <listeners>

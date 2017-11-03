@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
@@ -26,6 +27,14 @@ class TestKernel extends Kernel
         } else {
             $loader->load(__DIR__.'/config/config_27.yml');
         }
+    }
+
+    protected function prepareContainer(ContainerBuilder $container)
+    {
+        parent::prepareContainer($container);
+
+        $container->findDefinition('hostnet.form_handler.registry')->setPublic(true);
+        $container->findDefinition('hostnet.form_handler.factory')->setPublic(true);
     }
 
     /**
