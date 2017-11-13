@@ -1,0 +1,36 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\:
+        resource: '../HandlerType'
+
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\:
+        resource: '../Legacy'
+
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleNotTaggedFormHandler:
+        autoconfigure: false
+
+    app.handler.type.full_form: '@Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler'
+    app.handler.type.simple_form: '@Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleFormHandler'
+    app.handler.type.simple_form_not_tagged: '@Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleNotTaggedFormHandler'
+    app.handler.legacy.normal: '@Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormHandler'
+    app.handler.legacy.variable: '@Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormVariableOptionsHandler'
+    app.handler.legacy.named: '@Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyNamedFormHandler'
+
+framework:
+    test: true
+
+    secret: test
+
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+
+    form: true
+
+    validation:
+        enable_annotations: true
+
+    translator:
+        fallback: en

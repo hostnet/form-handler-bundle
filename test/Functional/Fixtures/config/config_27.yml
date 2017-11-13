@@ -1,8 +1,32 @@
-imports:
-    - { resource: config.yml }
-
 services:
-    # added to test support for symfony 2.7
+    app.handler.type.full_form:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler
+        tags:
+            - { name: form.handler }
+
+    app.handler.type.simple_form:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleFormHandler
+        tags:
+            - { name: form.handler }
+
+    app.handler.type.simple_form_not_tagged:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleNotTaggedFormHandler
+
+    app.handler.legacy.normal:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormHandler
+        tags:
+            - { name: form.handler }
+
+    app.handler.legacy.variable:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormVariableOptionsHandler
+        tags:
+            - { name: form.handler }
+
+    app.handler.legacy.named:
+        class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyNamedFormHandler
+        tags:
+            - { name: form.handler }
+
     app.handler.type.full_27_form:
         class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler27
         tags:
@@ -12,3 +36,19 @@ services:
         class: Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestType27
         tags:
             - { name: form.type, alias: test }
+
+framework:
+    test: true
+
+    secret: test
+
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+
+    form: true
+
+    validation:
+        enable_annotations: true
+
+    translator:
+        fallback: en
