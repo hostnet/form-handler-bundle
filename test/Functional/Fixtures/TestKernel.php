@@ -22,8 +22,10 @@ class TestKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        if (Kernel::VERSION_ID >= 30000) {
-            $loader->load(__DIR__.'/config/config.yml');
+        if (Kernel::VERSION_ID >= 30300) {
+            $loader->load(__DIR__.'/config/config_33.yml');
+        } elseif (Kernel::VERSION_ID >= 30000) {
+            $loader->load(__DIR__.'/config/config_32.yml');
         } else {
             $loader->load(__DIR__.'/config/config_27.yml');
         }
