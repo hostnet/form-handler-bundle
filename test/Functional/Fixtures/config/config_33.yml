@@ -33,6 +33,9 @@ services:
         alias: 'Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyNamedFormHandler'
         public: true
 
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestController:
+        tags: ['controller.service_arguments']
+
 framework:
     test: true
 

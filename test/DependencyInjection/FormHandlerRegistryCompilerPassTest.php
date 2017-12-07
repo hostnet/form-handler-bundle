@@ -4,6 +4,7 @@
  */
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
+use Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -25,10 +26,10 @@ class FormHandlerRegistryCompilerPassTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider processDataProvider
      */
-    public function testProcess($tagged_services)
+    public function testProcess($service_name, $tagged_services)
     {
         $container = new ContainerBuilder();
-        $container->setDefinition('form_handler.param_converter', new Definition());
+        $container->setDefinition($service_name, new Definition());
         $container->setDefinition('hostnet.form_handler.registry', new Definition(null, [null, null]));
 
         foreach ($tagged_services as $id => $tag) {
@@ -42,8 +43,10 @@ class FormHandlerRegistryCompilerPassTest extends \PHPUnit_Framework_TestCase
     public function processDataProvider()
     {
         return [
-            [[]],
-            [['test.service' => 'form.handler', 'test.phpunit' => 'form.handler']]
+            ['form_handler.param_converter', []],
+            [FormParamConverter::class, []],
+            ['form_handler.param_converter', ['test.service' => 'form.handler', 'test.phpunit' => 'form.handler']],
+            [FormParamConverter::class, ['test.service' => 'form.handler', 'test.phpunit' => 'form.handler']],
         ];
     }
 }
