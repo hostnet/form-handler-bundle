@@ -5,7 +5,6 @@
 namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestData;
-use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestType;
 use Hostnet\Component\FormHandler\ActionSubscriberInterface;
 use Hostnet\Component\FormHandler\HandlerActions;
 use Hostnet\Component\FormHandler\HandlerConfigInterface;
