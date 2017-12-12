@@ -35,7 +35,7 @@ class FormHandlerRegistryCompilerPass implements CompilerPassInterface
             $class      = $container->getDefinition($id)->setPublic(true)->getClass();
             $handlers[] = [$id, $class];
 
-            if ($register_with_param_converter && is_a($class, FormHandlerInterface::class, true)) {
+            if ($register_with_param_converter && is_subclass_of($class, FormHandlerInterface::class)) {
                 $legacy_handlers[$id] = $class;
             }
         }
