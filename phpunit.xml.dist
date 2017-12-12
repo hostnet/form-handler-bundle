@@ -4,11 +4,6 @@
     xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.0/phpunit.xsd"
     colors="true" bootstrap="vendor/autoload.php">
 
-    <php>
-        <server name="KERNEL_DIR" value="test/Functional/Fixtures"/>
-        <server name="KERNEL_CLASS" value="TestKernel"/>
-    </php>
-
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>

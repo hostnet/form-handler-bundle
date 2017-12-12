@@ -1,19 +1,48 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
+namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 
-class TestKernel extends Kernel
+final class TestKernel extends Kernel
 {
+    private $config_file;
+
+    public function __construct(array $options)
+    {
+        $this->config_file = isset($options['config_file']) ? $options['config_file'] : 'config.yml';
+
+        parent::__construct(
+            isset($options['environment']) ? $options['environment'] : 'test',
+            isset($options['debug']) ? $options['debug'] : true
+        );
+    }
+
+    public static function getLegacyConfigFilename()
+    {
+        if (Kernel::VERSION_ID >= 30300) {
+            return 'config_33.yml';
+        }
+
+        if (Kernel::VERSION_ID >= 30000) {
+            return 'config_32.yml';
+        }
+
+        return 'config_27.yml';
+    }
+
     /**
      * {@inheritdoc}
      */
     public function registerBundles()
     {
         return array(
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle(),
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle(),
         );
     }
 
@@ -22,13 +51,7 @@ class TestKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        if (Kernel::VERSION_ID >= 30300) {
-            $loader->load(__DIR__.'/config/config_33.yml');
-        } elseif (Kernel::VERSION_ID >= 30000) {
-            $loader->load(__DIR__.'/config/config_32.yml');
-        } else {
-            $loader->load(__DIR__.'/config/config_27.yml');
-        }
+        $loader->load(__DIR__."/config/{$this->config_file}");
     }
 
     protected function prepareContainer(ContainerBuilder $container)

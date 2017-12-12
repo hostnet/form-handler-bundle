@@ -2,12 +2,12 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
-
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler27;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestData;
+use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,17 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class HandlerTest extends KernelTestCase
 {
+    /**
+     * BC for current tests, new tests should get their own config.
+     */
     protected function setUp()
     {
-        static::bootKernel();
+        static::bootKernel(['config_file' => TestKernel::getLegacyConfigFilename()]);
+    }
+
+    protected static function createKernel(array $options = array())
+    {
+        return new TestKernel($options);
     }
 
     public function testValid()
