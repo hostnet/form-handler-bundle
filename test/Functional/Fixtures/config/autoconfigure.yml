@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\:
+        resource: '../HandlerType'
+
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\:
+        resource: '../Legacy'
+
+framework:
+    test: true
+    secret: test
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+    form: true
+    validation:
+        enable_annotations: true
+    translator:
+        fallback: en

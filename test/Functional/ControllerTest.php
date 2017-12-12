@@ -34,10 +34,9 @@ class ControllerTest extends KernelTestCase
         if (Kernel::VERSION_ID < 30300) {
             self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
         }
+
         if (!interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')) {
-            $this->markTestSkipped(
-                'Sensio Extra bundle is not installed.'
-            );
+            $this->markTestSkipped('Sensio Extra bundle is not installed.');
         }
 
         $container = self::$kernel->getContainer();

@@ -67,7 +67,7 @@ final class TestKernel extends Kernel
      */
     public function getCacheDir()
     {
-        return __DIR__.'/../../../var/cache/' . $this->getEnvironment();
+        return __DIR__.'/../../../var/cache/'.md5($this->getEnvironment().$this->config_file);
     }
 
     /**
