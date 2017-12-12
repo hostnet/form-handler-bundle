@@ -1,5 +1,9 @@
 <?php
+/**
+ * @copyright 2017 Hostnet B.V.
+ */
 namespace Hostnet\Bundle\FormHandlerBundle;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -22,9 +26,8 @@ class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
     public function testIsDeprecated()
     {
         $container = new ContainerBuilder();
-        $bundle = new FormHandlerBundle();
+        $bundle    = new FormHandlerBundle();
 
         $bundle->build($container);
-
     }
 }

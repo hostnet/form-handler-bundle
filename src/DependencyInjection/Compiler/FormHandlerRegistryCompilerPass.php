@@ -18,12 +18,13 @@ class FormHandlerRegistryCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $registerWithParamConverter = false;
+        $register_with_param_converter = false;
 
-        if (interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface') &&
-            $container->hasDefinition('form_handler.param_converter')) {
-            $definition = $container->getDefinition('form_handler.param_converter');
-            $registerWithParamConverter = true;
+        if (interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')
+            && $container->hasDefinition('form_handler.param_converter')
+        ) {
+            $definition                    = $container->getDefinition('form_handler.param_converter');
+            $register_with_param_converter = true;
         }
 
         $tagged_services = array_keys($container->findTaggedServiceIds('form.handler'));
@@ -33,7 +34,7 @@ class FormHandlerRegistryCompilerPass implements CompilerPassInterface
             $class      = $container->getDefinition($id)->setPublic(true)->getClass();
             $handlers[] = [$id, $class];
 
-            if ($registerWithParamConverter) {
+            if ($register_with_param_converter) {
                 $definition->addMethodCall('addFormClass', [$id, $class]);
             }
         }

@@ -18,7 +18,7 @@ class FormHandlerRegistryCompilerPassTest extends \PHPUnit_Framework_TestCase
     {
         if (!interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')) {
             $this->markTestSkipped(
-              'Sensio Extra bundle is not installed.'
+                'Sensio Extra bundle is not installed.'
             );
         }
     }
