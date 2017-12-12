@@ -39,16 +39,11 @@ services:
 
 framework:
     test: true
-
     secret: test
-
     router:
         resource: '%kernel.root_dir%/config/routing.yml'
-
     form: true
-
     validation:
         enable_annotations: true
-
     translator:
         fallback: en
