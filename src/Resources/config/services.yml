@@ -3,6 +3,7 @@ services:
         class: Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
         arguments:
             - "@service_container"
+            - [] # inject from the compiler pass
         tags:
             - { name: request.param_converter, converter: form_information_converter }
 
