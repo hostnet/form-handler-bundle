@@ -17,6 +17,9 @@ class AutoconfigureTest extends KernelTestCase
 {
     protected function setUp()
     {
+        if (Kernel::VERSION_ID < 30300) {
+            self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
+        }
         static::bootKernel(['config_file' => 'autoconfigure.yml']);
     }
 
@@ -27,10 +30,6 @@ class AutoconfigureTest extends KernelTestCase
 
     public function testHandlerType()
     {
-        if (Kernel::VERSION_ID < 30300) {
-            self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
-        }
-
         $container       = self::$kernel->getContainer();
         $handler_factory = $container->get('hostnet.form_handler.factory');
         $request         = Request::create('/', 'POST', ['test' => ['test' => 'foobar']]);
@@ -50,10 +49,6 @@ class AutoconfigureTest extends KernelTestCase
      */
     public function testFormHandler()
     {
-        if (Kernel::VERSION_ID < 30300) {
-            self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
-        }
-
         $container       = self::$kernel->getContainer();
         $handler_factory = $container->get('hostnet.form_handler.factory');
         $request         = Request::create('/', 'POST', ['test' => ['test' => 'foobar']]);
