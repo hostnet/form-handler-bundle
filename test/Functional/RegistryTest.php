@@ -2,7 +2,6 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
-
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler;
@@ -11,14 +10,32 @@ use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleNotTa
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormHandler;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormVariableOptionsHandler;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyNamedFormHandler;
+use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestKernel;
 use Hostnet\Component\FormHandler\HandlerTypeAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpKernel\Kernel;
 
 class RegistryTest extends KernelTestCase
 {
+    /**
+     * BC for current tests, new tests should get their own config.
+     */
     protected function setUp()
     {
-        static::bootKernel();
+        $file = 'config_27.yml';
+
+        if (Kernel::VERSION_ID >= 30300) {
+            $file = 'config_33.yml';
+        } elseif (Kernel::VERSION_ID >= 30000) {
+            $file = 'config_32.yml';
+        }
+
+        static::bootKernel(['config_file' => $file]);
+    }
+
+    protected static function createKernel(array $options = array())
+    {
+        return new TestKernel($options);
     }
 
     public function test()

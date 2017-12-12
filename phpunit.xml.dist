@@ -6,7 +6,7 @@
 
     <php>
         <server name="KERNEL_DIR" value="test/Functional/Fixtures"/>
-        <server name="KERNEL_CLASS" value="TestKernel"/>
+        <server name="KERNEL_CLASS" value="Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures"/>
     </php>
 
     <listeners>
