@@ -21,15 +21,7 @@ class ControllerTest extends KernelTestCase
      */
     protected function setUp()
     {
-        $file = 'config_27.yml';
-
-        if (Kernel::VERSION_ID >= 30300) {
-            $file = 'config_33.yml';
-        } elseif (Kernel::VERSION_ID >= 30000) {
-            $file = 'config_32.yml';
-        }
-
-        static::bootKernel(['config_file' => $file]);
+        static::bootKernel(['config_file' => TestKernel::getLegacyConfigFilename()]);
     }
 
     protected static function createKernel(array $options = array())

@@ -22,6 +22,19 @@ final class TestKernel extends Kernel
         );
     }
 
+    public static function getLegacyConfigFilename()
+    {
+        if (Kernel::VERSION_ID >= 30300) {
+            return 'config_33.yml';
+        }
+
+        if (Kernel::VERSION_ID >= 30000) {
+            return 'config_32.yml';
+        }
+
+        return 'config_27.yml';
+    }
+
     /**
      * {@inheritdoc}
      */
