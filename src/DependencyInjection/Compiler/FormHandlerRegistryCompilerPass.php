@@ -4,6 +4,7 @@
  */
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
+use Hostnet\Component\Form\FormHandlerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -23,23 +24,27 @@ class FormHandlerRegistryCompilerPass implements CompilerPassInterface
         if (interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')
             && $container->hasDefinition('form_handler.param_converter')
         ) {
-            $definition                    = $container->getDefinition('form_handler.param_converter');
             $register_with_param_converter = true;
         }
 
         $tagged_services = array_keys($container->findTaggedServiceIds('form.handler'));
         $handlers        = [];
+        $legacy_handlers = [];
 
         foreach ($tagged_services as $id) {
             $class      = $container->getDefinition($id)->setPublic(true)->getClass();
             $handlers[] = [$id, $class];
 
-            if ($register_with_param_converter) {
-                $definition->addMethodCall('addFormClass', [$id, $class]);
+            if ($register_with_param_converter && is_subclass_of($class, FormHandlerInterface::class)) {
+                $legacy_handlers[$id] = $class;
             }
         }
 
         // Add handlers to registry
         $container->getDefinition('hostnet.form_handler.registry')->replaceArgument(1, $handlers);
+
+        if (count($legacy_handlers) > 0) {
+            $container->getDefinition('form_handler.param_converter')->replaceArgument(1, $legacy_handlers);
+        }
     }
 }

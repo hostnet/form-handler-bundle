@@ -27,12 +27,13 @@ class FormParamConverter implements ParamConverterInterface
     private $handlers;
 
     /**
-     * @param ContainerInterface   $container
+     * @param ContainerInterface $container
+     * @param array              $handlers [$service_id => $class]
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, array $handlers = [])
     {
         $this->container = $container;
-        $this->handlers  = [];
+        $this->handlers  = $handlers;
     }
 
     /**
@@ -41,11 +42,15 @@ class FormParamConverter implements ParamConverterInterface
      */
     public function addFormClass($service_id, $class)
     {
+        @trigger_error(sprintf(
+            'Calling %s is deprecated as of 1.6 and will be removed in 2.0. Use the constructor argument instead.',
+            __METHOD__
+        ), E_USER_DEPRECATED);
         $this->handlers[$service_id] = $class;
     }
 
     /**
-     * @see \Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface::apply()
+     * {@inheritdoc}
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
@@ -64,11 +69,11 @@ class FormParamConverter implements ParamConverterInterface
     }
 
     /**
-     * @see \Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface::supports()
+     * {@inheritdoc}
      */
     public function supports(ParamConverter $configuration)
     {
-        return in_array($configuration->getClass(), $this->handlers);
+        return in_array($configuration->getClass(), $this->handlers, true);
     }
 
     /**
@@ -86,12 +91,12 @@ class FormParamConverter implements ParamConverterInterface
         }
         if (count($service_ids) === 0) {
             throw new \InvalidArgumentException(
-                sprintf("No service_id found for parameter converter %s.", $configuration->getName())
+                sprintf('No service_id found for parameter converter %s.', $configuration->getName())
             );
         }
         if (count($service_ids) > 1) {
             throw new \InvalidArgumentException(
-                sprintf("More than one service_id found for parameter converter %s.", $configuration->getName())
+                sprintf('More than one service_id found for parameter converter %s.', $configuration->getName())
             );
         }
 
