@@ -33,8 +33,8 @@ class TestController
         HandlerFactory $handler
     ) {
         $this->converter = $converter;
-        $this->provider = $provider;
-        $this->registry = $registry;
-        $this->handler = $handler;
+        $this->provider  = $provider;
+        $this->registry  = $registry;
+        $this->handler   = $handler;
     }
 }
