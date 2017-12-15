@@ -1,1 +1,4 @@
-
+app_action:
+    path: /
+    defaults:
+        _controller: 'Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestController::action'

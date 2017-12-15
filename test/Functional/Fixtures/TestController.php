@@ -5,10 +5,14 @@
 
 namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures;
 
+use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\SimpleFormHandler;
 use Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter;
 use Hostnet\Bundle\FormHandlerBundle\Registry\LegacyHandlerRegistry;
 use Hostnet\Component\Form\Simple\SimpleFormProvider;
 use Hostnet\Component\FormHandler\HandlerFactory;
+use Hostnet\Component\FormHandler\HandlerFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Controller testing fixture.
@@ -36,5 +40,16 @@ class TestController
         $this->provider  = $provider;
         $this->registry  = $registry;
         $this->handler   = $handler;
+    }
+
+    public function action(Request $request, HandlerFactoryInterface $factory)
+    {
+        $handler  = $factory->create(SimpleFormHandler::class);
+        $response = $handler->handle($request);
+        if ($response instanceof Response) {
+            return $response;
+        }
+
+        return new Response('test');
     }
 }

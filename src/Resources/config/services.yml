@@ -28,5 +28,5 @@ services:
     Hostnet\Bundle\FormHandlerBundle\Registry\LegacyHandlerRegistry: '@hostnet.form_handler.registry'
     Hostnet\Component\Form\FormProviderInterface: '@form_handler.provider.simple'
     Hostnet\Component\Form\Simple\SimpleFormProvider: '@form_handler.provider.simple'
-    Hostnet\Component\FormHandler\HandlerRegistryInterface: '@hostnet.form_handler.registry'
     Hostnet\Component\FormHandler\HandlerFactory: '@hostnet.form_handler.factory'
+    Hostnet\Component\FormHandler\HandlerFactoryInterface: '@hostnet.form_handler.factory'
