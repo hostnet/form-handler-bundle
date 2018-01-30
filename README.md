@@ -52,7 +52,6 @@ The `hostnet/form-handler-bundle` is licensed under the [MIT License](https://gi
 
 Get in touch
 ------------
- * Our primary contact channel is via IRC: [freenode.net#hostnet](http://webchat.freenode.net/?channels=%23hostnet).
  * We are available on the [symfony-devs](https://slackinvite.me/to/symfony-devs)
    slack server in [#hostnet-form-handlers](https://symfony-devs.slack.com/messages/C3SJH42QP).
  * Or via our email: opensource@hostnet.nl.
