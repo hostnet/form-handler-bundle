@@ -36,6 +36,6 @@ before_install:
     - if [[ "$SYMFONY_VERSION" != "" ]]; then composer require --no-update symfony/symfony:${SYMFONY_VERSION}; fi
     - if [[ "$WITHOUT_EXTRA_BUNDLE" != "" ]]; then composer remove "sensio/framework-extra-bundle" --dev; fi;
 
-install: COMPOSER_MEMORY_LIMIT="2G" composer update $COMPOSER_FLAGS --prefer-dist
+install: COMPOSER_MEMORY_LIMIT="4G" composer update $COMPOSER_FLAGS --prefer-dist
 
 script: vendor/bin/phpunit
