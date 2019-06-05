@@ -15,14 +15,14 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 class ControllerTest extends WebTestCase
 {
-    private $client;
+    private $test_client;
 
     /**
      * BC for current tests, new tests should get their own config.
      */
     protected function setUp()
     {
-        $this->client = static::createClient(['config_file' => TestKernel::getLegacyConfigFilename()]);
+        $this->test_client = static::createClient(['config_file' => TestKernel::getLegacyConfigFilename()]);
     }
 
     protected static function createKernel(array $options = array())
@@ -40,7 +40,7 @@ class ControllerTest extends WebTestCase
             $this->markTestSkipped('Sensio Extra bundle is not installed.');
         }
 
-        $crawler = $this->client->request('GET', '/');
+        $crawler = $this->test_client->request('GET', '/');
 
         self::assertSame('test', $crawler->text());
     }
