@@ -26,7 +26,7 @@ class HostnetFormHandlerBundle extends Bundle
     {
         // load default services.yml
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/Resources/config'));
-        $loader->load('services.yml');
+        $loader->load('services.yaml');
 
         parent::build($container);
         $container->addCompilerPass(new FormHandlerRegistryCompilerPass());
