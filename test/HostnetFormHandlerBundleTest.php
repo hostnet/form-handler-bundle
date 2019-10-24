@@ -7,13 +7,14 @@ namespace Hostnet\Bundle\FormHandlerBundle;
 use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass;
 use Hostnet\Component\Form\FormHandlerInterface;
 use Hostnet\Component\FormHandler\HandlerTypeInterface;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- * @coversDefaultClass Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle
+ * @coversDefaultClass \Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle
  */
-class HostnetFormHandlerBundleTest extends \PHPUnit_Framework_TestCase
+class HostnetFormHandlerBundleTest extends TestCase
 {
     public function testBuild()
     {
