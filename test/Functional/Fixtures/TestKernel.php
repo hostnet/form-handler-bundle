@@ -24,6 +24,11 @@ final class TestKernel extends Kernel
 
     public static function getLegacyConfigFilename()
     {
+        if (Kernel::VERSION_ID >= 40200) {
+            return 'config_42.yml';
+        }
+
+
         if (Kernel::VERSION_ID >= 30300) {
             return 'config_33.yml';
         }
@@ -33,6 +38,11 @@ final class TestKernel extends Kernel
         }
 
         return 'config_27.yml';
+    }
+
+    public function getProjectDir()
+    {
+        return __DIR__;
     }
 
     /**

@@ -5,6 +5,7 @@
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -12,7 +13,7 @@ use Symfony\Component\DependencyInjection\Definition;
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  * @covers \Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass
  */
-class FormHandlerRegistryCompilerPassTest extends \PHPUnit_Framework_TestCase
+class FormHandlerRegistryCompilerPassTest extends TestCase
 {
     protected function setUp()
     {

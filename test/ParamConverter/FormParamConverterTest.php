@@ -4,6 +4,7 @@
  */
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
+use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  * @covers \Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
  */
-class FormParamConverterTest extends \PHPUnit_Framework_TestCase
+class FormParamConverterTest extends TestCase
 {
     private $container;
     private $request;

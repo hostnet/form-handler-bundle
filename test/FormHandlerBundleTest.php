@@ -4,13 +4,14 @@
  */
 namespace Hostnet\Bundle\FormHandlerBundle;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Piotr Rzeczkowski <piotr@rzeka.net>
- * @coversDefaultClass Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle
+ * @coversDefaultClass \Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle
  */
-class FormHandlerBundleTest extends \PHPUnit_Framework_TestCase
+class FormHandlerBundleTest extends TestCase
 {
     public function testIsInstanceOfFormHandlerBundle()
     {
