@@ -39,6 +39,11 @@ class FormHandlerRegistryCompilerPassTest extends TestCase
 
         $pass = new FormHandlerRegistryCompilerPass();
         $pass->process($container);
+
+        self::assertCount(
+            \count($tagged_services),
+            $container->getDefinition('hostnet.form_handler.registry')->getArgument(1)
+        );
     }
 
     public function processDataProvider()
