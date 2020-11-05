@@ -2,14 +2,13 @@
 /**
  * @copyright 2014-2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
 use Hostnet\Component\Form\FormHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- */
 class HandlerMock implements FormHandlerInterface
 {
     public function getType()

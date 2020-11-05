@@ -2,14 +2,16 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @author Piotr Rzeczkowski <piotr@rzeka.net>
  * @coversDefaultClass \Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle
+ * @covers \Hostnet\Bundle\FormHandlerBundle\FormHandlerBundle
  */
 class FormHandlerBundleTest extends TestCase
 {

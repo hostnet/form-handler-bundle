@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle;
 
 use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass;
@@ -11,8 +13,8 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  * @coversDefaultClass \Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle
+ * @covers \Hostnet\Bundle\FormHandlerBundle\HostnetFormHandlerBundle
  */
 class HostnetFormHandlerBundleTest extends TestCase
 {

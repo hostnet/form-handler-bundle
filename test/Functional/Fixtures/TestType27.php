@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures;
 
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +20,7 @@ class TestType27 extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => TestData::class
+            'data_class' => TestData::class,
         ]);
     }
 
