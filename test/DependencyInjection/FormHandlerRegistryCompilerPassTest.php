@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter;
@@ -10,7 +12,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  * @covers \Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass
  */
 class FormHandlerRegistryCompilerPassTest extends TestCase

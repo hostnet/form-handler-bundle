@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestKernel;
@@ -10,8 +12,6 @@ use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Controller test.
- *
- * @author Gawain Lynch <gawain.lynch@gmail.com>
  */
 class ControllerTest extends WebTestCase
 {
@@ -25,7 +25,7 @@ class ControllerTest extends WebTestCase
         $this->test_client = static::createClient(['config_file' => TestKernel::getLegacyConfigFilename()]);
     }
 
-    protected static function createKernel(array $options = array())
+    protected static function createKernel(array $options = [])
     {
         return new TestKernel($options);
     }

@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler;
@@ -23,7 +25,7 @@ class HandlerTest extends KernelTestCase
         static::bootKernel(['config_file' => TestKernel::getLegacyConfigFilename()]);
     }
 
-    protected static function createKernel(array $options = array())
+    protected static function createKernel(array $options = [])
     {
         return new TestKernel($options);
     }
