@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
 use PHPUnit\Framework\TestCase;
@@ -9,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
  * @covers \Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
  */
 class FormParamConverterTest extends TestCase
@@ -163,7 +164,7 @@ class FormParamConverterTest extends TestCase
         return new ParamConverter([
             'class'   => $class,
             'options' => $options,
-            'name'    => $name
+            'name'    => $name,
         ]);
     }
 }

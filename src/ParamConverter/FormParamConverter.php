@@ -2,6 +2,8 @@
 /**
  * @copyright 2014-2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\ParamConverter;
 
 use Hostnet\Component\Form\FormHandlerInterface;
@@ -10,10 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInte
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Yannick de Lange <ydelange@hostnet.nl>
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- */
 class FormParamConverter implements ParamConverterInterface
 {
     /**
@@ -55,9 +53,7 @@ class FormParamConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration)
     {
         $options    = $configuration->getOptions();
-        $service_id = isset($options['service_id'])
-            ? $options['service_id']
-            : $this->getServiceIdForClassName($configuration);
+        $service_id = $options['service_id'] ?? $this->getServiceIdForClassName($configuration);
         $handler    = $this->container->get($service_id);
         $class      = $this->handlers[$service_id];
 

@@ -2,6 +2,8 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle;
 
 use Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler\FormHandlerRegistryCompilerPass;
@@ -12,11 +14,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Yannick de Lange <ydelange@hostnet.nl>
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- * @author Hidde Boomsma <hboomsma@hostnet.nl>
- */
 class HostnetFormHandlerBundle extends Bundle
 {
     /**

@@ -2,16 +2,14 @@
 /**
  * @copyright 2017 Hostnet B.V.
  */
+declare(strict_types=1);
+
 namespace Hostnet\Bundle\FormHandlerBundle\DependencyInjection\Compiler;
 
 use Hostnet\Component\Form\FormHandlerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Yannick de Lange <ydelange@hostnet.nl>
- * @author Iltar van der Berg <ivanderberg@hostnet.nl>
- */
 class FormHandlerRegistryCompilerPass implements CompilerPassInterface
 {
     /**
