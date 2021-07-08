@@ -41,6 +41,7 @@ framework:
     test: true
     secret: test
     router:
+        utf8: true
         resource: '%kernel.root_dir%/config/routing.yml'
     form: true
     validation:
