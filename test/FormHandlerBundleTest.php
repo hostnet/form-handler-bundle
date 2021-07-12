@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class FormHandlerBundleTest extends TestCase
 {
-    public function testIsInstanceOfFormHandlerBundle()
+    public function testIsInstanceOfFormHandlerBundle(): void
     {
         $bundle = new FormHandlerBundle();
 
@@ -26,7 +26,7 @@ class FormHandlerBundleTest extends TestCase
      * @group legacy
      * @expectedDeprecation The %s is deprecated. Use %s instead.
      */
-    public function testIsDeprecated()
+    public function testIsDeprecated(): void
     {
         $container = new ContainerBuilder();
         $bundle    = new FormHandlerBundle();

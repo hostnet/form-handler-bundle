@@ -13,26 +13,27 @@ use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormHandle
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyFormVariableOptionsHandler;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\LegacyNamedFormHandler;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestKernel;
+use Hostnet\Component\FormHandler\Exception\InvalidHandlerTypeException;
 use Hostnet\Component\FormHandler\HandlerTypeAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class RegistryTest extends KernelTestCase
 {
     /**
      * BC for current tests, new tests should get their own config.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         static::bootKernel(['config_file' => TestKernel::getLegacyConfigFilename()]);
     }
 
-    protected static function createKernel(array $options = [])
+    protected static function createKernel(array $options = []): KernelInterface
     {
         return new TestKernel($options);
     }
 
-    public function test()
+    public function test(): void
     {
         $container = self::$kernel->getContainer();
         $registry  = $container->get('hostnet.form_handler.registry');
@@ -61,24 +62,22 @@ class RegistryTest extends KernelTestCase
         );
     }
 
-    /**
-     * @expectedException \Hostnet\Component\FormHandler\Exception\InvalidHandlerTypeException
-     */
-    public function testMissing()
+    public function testMissing(): void
     {
         $container = self::$kernel->getContainer();
         $registry  = $container->get('hostnet.form_handler.registry');
+
+        $this->expectException(InvalidHandlerTypeException::class);
 
         $registry->getType(\stdClass::class);
     }
 
-    /**
-     * @expectedException \Hostnet\Component\FormHandler\Exception\InvalidHandlerTypeException
-     */
-    public function testNotTagged()
+    public function testNotTagged(): void
     {
         $container = self::$kernel->getContainer();
         $registry  = $container->get('hostnet.form_handler.registry');
+
+        $this->expectException(InvalidHandlerTypeException::class);
 
         $registry->getType(SimpleNotTaggedFormHandler::class);
     }

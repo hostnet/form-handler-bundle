@@ -18,7 +18,7 @@ class FormParamConverterTest extends TestCase
     private $container;
     private $request;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')) {
             $this->markTestSkipped('Sensio Extra bundle is not installed.');
@@ -33,7 +33,7 @@ class FormParamConverterTest extends TestCase
      * @group legacy
      * @expectedDeprecation Calling %s is deprecated as of 1.6 and will be removed in 2.0. Use %s instead.
      */
-    public function testApplyFromServiceIdHandlerNotFound()
+    public function testApplyFromServiceIdHandlerNotFound(): void
     {
         $configuration = new ParamConverter(['class' => 'Test\Henk', 'options' => ['service_id' => 'test.henk']]);
         $converter     = new FormParamConverter($this->container);
@@ -54,7 +54,7 @@ class FormParamConverterTest extends TestCase
      * @group legacy
      * @expectedDeprecation Calling %s is deprecated as of 1.6 and will be removed in 2.0. Use %s instead.
      */
-    public function testApplyFromServiceIdDeprecated()
+    public function testApplyFromServiceIdDeprecated(): void
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = $this->buildParamConverter(
@@ -78,7 +78,7 @@ class FormParamConverterTest extends TestCase
         $this->assertEquals($handler, $this->request->attributes->get('henk'));
     }
 
-    public function testApplyFromServiceId()
+    public function testApplyFromServiceId(): void
     {
         $converter = new FormParamConverter($this->container, [
             'test.henk' => 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock',
@@ -108,7 +108,7 @@ class FormParamConverterTest extends TestCase
      * @group legacy
      * @expectedDeprecation Calling %s is deprecated as of 1.6 and will be removed in 2.0. Use %s instead.
      */
-    public function testGetServiceIdForClassName()
+    public function testGetServiceIdForClassName(): void
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = $this->buildParamConverter(
@@ -121,10 +121,7 @@ class FormParamConverterTest extends TestCase
         $converter->apply($this->request, $configuration);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetServiceIdForClassNameNoMatch()
+    public function testGetServiceIdForClassNameNoMatch(): void
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = $this->buildParamConverter(
@@ -133,16 +130,16 @@ class FormParamConverterTest extends TestCase
             'henk'
         );
 
+        $this->expectException(\InvalidArgumentException::class);
+
         $converter->apply($this->request, $configuration);
     }
 
     /**
      * @group legacy
      * @expectedDeprecation Calling %s is deprecated as of 1.6 and will be removed in 2.0. Use %s instead.
-     *
-     * @expectedException \InvalidArgumentException
      */
-    public function testGetServiceIdForClassNameTooManyClassesForOneService()
+    public function testGetServiceIdForClassNameTooManyClassesForOneService(): void
     {
         $converter     = new FormParamConverter($this->container);
         $configuration = $this->buildParamConverter(
@@ -156,10 +153,12 @@ class FormParamConverterTest extends TestCase
             $converter->addFormClass($id, 'Hostnet\Bundle\FormHandlerBundle\ParamConverter\HandlerMock');
         }
 
+        $this->expectException(\InvalidArgumentException::class);
+
         $converter->apply($this->request, $configuration);
     }
 
-    private function buildParamConverter($class, array $options = [], $name = null)
+    private function buildParamConverter($class, array $options = [], $name = null): ParamConverter
     {
         return new ParamConverter([
             'class'   => $class,
