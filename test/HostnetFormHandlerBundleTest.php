@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class HostnetFormHandlerBundleTest extends TestCase
 {
-    public function testBuild()
+    public function testBuild(): void
     {
         $container = new ContainerBuilder();
 

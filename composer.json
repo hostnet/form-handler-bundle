@@ -1,18 +1,9 @@
 {
-    "name":        "hostnet/form-handler-bundle",
-    "type":        "symfony-bundle",
-    "description": "Hostnet form handler to provide an easier way of handling forms in actions",
-    "license":     "MIT",
-    "authors": [
-        {
-            "name":  "Iltar van der Berg",
-            "email": "ivanderberg@hostnet.nl"
-        },
-        {
-            "name":  "Yannick de Lange",
-            "email": "ydelange@hostnet.nl"
-        }
-    ],
+    "name":              "hostnet/form-handler-bundle",
+    "type":              "symfony-bundle",
+    "description":       "Hostnet form handler to provide an easier way of handling forms in actions",
+    "license":           "MIT",
+    "minimum-stability": "stable",
     "require": {
         "php":                            ">=7.3",
         "hostnet/form-handler-component": "^1.4.0",
@@ -22,7 +13,7 @@
     "require-dev": {
         "doctrine/annotations":          "^1.0",
         "hostnet/phpcs-tool":            "^8.3",
-        "phpunit/phpunit":               "^5.7|^7.5",
+        "phpunit/phpunit":               "^9.5.5",
         "sensio/framework-extra-bundle": "3.*|^5.0",
         "symfony/browser-kit":           "^4.0|^5.0",
         "symfony/finder":                "^4.0|^5.0",
@@ -50,8 +41,6 @@
             "test/Functional/Fixtures/TestKernel.php"
         ]
     },
-    "minimum-stability" : "dev",
-    "prefer-stable"     : true,
     "archive": {
         "exclude": [
             "/test"

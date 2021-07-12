@@ -14,10 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class AutoconfigureTest extends KernelTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (Kernel::VERSION_ID < 30300) {
             self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
@@ -25,12 +26,12 @@ class AutoconfigureTest extends KernelTestCase
         static::bootKernel(['config_file' => 'autoconfigure.yml']);
     }
 
-    protected static function createKernel(array $options = [])
+    protected static function createKernel(array $options = []): KernelInterface
     {
         return new TestKernel($options);
     }
 
-    public function testHandlerType()
+    public function testHandlerType(): void
     {
         $container       = self::$kernel->getContainer();
         $handler_factory = $container->get('hostnet.form_handler.factory');
@@ -49,7 +50,7 @@ class AutoconfigureTest extends KernelTestCase
      * @group legacy
      * @expectedDeprecation Using %s is deprecated, use Hostnet\Component\FormHandler\HandlerTypeInterface instead.
      */
-    public function testFormHandler()
+    public function testFormHandler(): void
     {
         $container       = self::$kernel->getContainer();
         $handler_factory = $container->get('hostnet.form_handler.factory');

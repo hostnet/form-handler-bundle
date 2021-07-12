@@ -14,23 +14,24 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class HandlerTest extends KernelTestCase
 {
     /**
      * BC for current tests, new tests should get their own config.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         static::bootKernel(['config_file' => TestKernel::getLegacyConfigFilename()]);
     }
 
-    protected static function createKernel(array $options = [])
+    protected static function createKernel(array $options = []): KernelInterface
     {
         return new TestKernel($options);
     }
 
-    public function testValid()
+    public function testValid(): void
     {
         if (Kernel::VERSION_ID < 20800) {
             self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
@@ -49,7 +50,7 @@ class HandlerTest extends KernelTestCase
         self::assertEquals('http://success.nl/', $response->getTargetUrl());
     }
 
-    public function testInvalid()
+    public function testInvalid(): void
     {
         if (Kernel::VERSION_ID < 20800) {
             self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
@@ -71,7 +72,7 @@ class HandlerTest extends KernelTestCase
     /**
      * @group legacy
      */
-    public function testValid27()
+    public function testValid27(): void
     {
         if (Kernel::VERSION_ID >= 30000) {
             self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
@@ -93,7 +94,7 @@ class HandlerTest extends KernelTestCase
     /**
      * @group legacy
      */
-    public function testInvalid27()
+    public function testInvalid27(): void
     {
         if (Kernel::VERSION_ID >= 30000) {
             self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));

@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 class FormHandlerRegistryCompilerPassTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!interface_exists('Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface')) {
             $this->markTestSkipped(
@@ -28,7 +28,7 @@ class FormHandlerRegistryCompilerPassTest extends TestCase
     /**
      * @dataProvider processDataProvider
      */
-    public function testProcess($service_name, $tagged_services)
+    public function testProcess($service_name, $tagged_services): void
     {
         $container = new ContainerBuilder();
         $container->setDefinition($service_name, new Definition());
@@ -47,7 +47,7 @@ class FormHandlerRegistryCompilerPassTest extends TestCase
         );
     }
 
-    public function processDataProvider()
+    public function processDataProvider(): iterable
     {
         return [
             ['form_handler.param_converter', []],
