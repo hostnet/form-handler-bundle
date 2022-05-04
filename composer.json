@@ -41,6 +41,12 @@
             "test/Functional/Fixtures/TestKernel.php"
         ]
     },
+    "config": {
+        "allow-plugins": {
+            "hostnet/*":                                      true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    },
     "archive": {
         "exclude": [
             "/test"
