@@ -12,7 +12,7 @@ use Hostnet\Component\FormHandler\HandlerTypeInterface;
 
 class SimpleNotTaggedFormHandler implements HandlerTypeInterface
 {
-    public function configure(HandlerConfigInterface $config)
+    public function configure(HandlerConfigInterface $config): void
     {
         $config->setType(TestType::class);
     }
