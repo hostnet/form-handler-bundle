@@ -4,5 +4,5 @@
     <exclude-pattern>test/Functional/Fixtures/TestKernel.php</exclude-pattern>
 
     <!-- Use the Hostnet code conventions -->
-    <rule ref="Hostnet" />
+    <rule ref="Hostnet-Level-1" />
 </ruleset>

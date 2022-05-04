@@ -27,4 +27,5 @@ jobs:
                 run: composer install --no-progress --prefer-dist --optimize-autoloader
             -   name: phpunit
                 run: php vendor/bin/phpunit
-
+            -   name: phpcs
+                run: php vendor/bin/phpcs

@@ -12,7 +12,7 @@
     },
     "require-dev": {
         "doctrine/annotations":          "^1.0",
-        "hostnet/phpcs-tool":            "^8.3",
+        "hostnet/phpcs-tool":            "^9.1.0",
         "phpunit/phpunit":               "^9.5.5",
         "sensio/framework-extra-bundle": "3.*|^5.0",
         "symfony/browser-kit":           "^4.0|^5.0",
@@ -40,6 +40,12 @@
         "files": [
             "test/Functional/Fixtures/TestKernel.php"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "hostnet/*":                                      true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
     },
     "archive": {
         "exclude": [

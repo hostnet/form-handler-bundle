@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FullFormHandler27 implements HandlerTypeInterface, ActionSubscriberInterface
 {
-    public function configure(HandlerConfigInterface $config)
+    public function configure(HandlerConfigInterface $config): void
     {
         $config->setType('test');
         $config->registerActionSubscriber($this);

@@ -26,11 +26,11 @@ class HandlerMock implements FormHandlerInterface
         return [];
     }
 
-    public function getForm()
+    public function getForm(): void
     {
     }
 
-    public function setForm(FormInterface $form)
+    public function setForm(FormInterface $form): void
     {
     }
 }

@@ -40,7 +40,7 @@ final class TestKernel extends Kernel
         return 'config_27.yml';
     }
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return __DIR__;
     }
@@ -48,7 +48,7 @@ final class TestKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return array(
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -75,7 +75,7 @@ final class TestKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return __DIR__.'/../../../var/cache/'.md5($this->getEnvironment().$this->config_file);
     }
@@ -83,7 +83,7 @@ final class TestKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return __DIR__.'/../../../var/logs';
     }
