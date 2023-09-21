@@ -6,7 +6,7 @@
     "minimum-stability": "stable",
     "require": {
         "php":                            "^7.3|^8.0",
-        "hostnet/form-handler-component": "^1.7.1",
+        "hostnet/form-handler-component": "^1.7.3",
         "symfony/expression-language":    "^4.0|^5.0|^6.0",
         "symfony/http-foundation":        "^4.0|^5.0|^6.0"
     },
