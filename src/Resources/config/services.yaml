@@ -1,12 +1,4 @@
 services:
-    form_handler.param_converter:
-        class: Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter
-        arguments:
-            - "@service_container"
-            - [] # inject from the compiler pass
-        tags:
-            - { name: request.param_converter, converter: form_information_converter }
-
     form_handler.provider.simple:
         class: Hostnet\Component\Form\Simple\SimpleFormProvider
         arguments:
@@ -16,7 +8,7 @@ services:
         class: Hostnet\Bundle\FormHandlerBundle\Registry\LegacyHandlerRegistry
         arguments:
             - "@service_container"
-            - [] # injected from the compiler pass
+            - !tagged_iterator form.handler
 
     hostnet.form_handler.factory:
         class: Hostnet\Component\FormHandler\HandlerFactory
@@ -24,9 +16,5 @@ services:
             - "@form.factory"
             - "@hostnet.form_handler.registry"
 
-    Hostnet\Bundle\FormHandlerBundle\ParamConverter\FormParamConverter: '@form_handler.param_converter'
-    Hostnet\Bundle\FormHandlerBundle\Registry\LegacyHandlerRegistry: '@hostnet.form_handler.registry'
     Hostnet\Component\Form\FormProviderInterface: '@form_handler.provider.simple'
-    Hostnet\Component\Form\Simple\SimpleFormProvider: '@form_handler.provider.simple'
-    Hostnet\Component\FormHandler\HandlerFactory: '@hostnet.form_handler.factory'
     Hostnet\Component\FormHandler\HandlerFactoryInterface: '@hostnet.form_handler.factory'

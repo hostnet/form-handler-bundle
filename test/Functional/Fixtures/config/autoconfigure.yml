@@ -2,13 +2,12 @@ services:
     _defaults:
         autoconfigure: true
         autowire: true
-        public: false
+        public: true
 
     Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\:
         resource: '../HandlerType'
 
-    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\Legacy\:
-        resource: '../Legacy'
+    Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestController:
 
 framework:
     test: true
@@ -18,6 +17,11 @@ framework:
         resource: '%kernel.project_dir%/config/routing.yml'
     form: true
     validation:
-        enable_annotations: true
+        enable_attributes: true
+        email_validation_mode: html5
     translator:
         fallback: en
+    http_method_override: false
+    handle_all_throwables: true
+    php_errors:
+        log: true

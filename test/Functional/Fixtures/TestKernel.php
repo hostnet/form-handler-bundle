@@ -22,24 +22,6 @@ final class TestKernel extends Kernel
         );
     }
 
-    public static function getLegacyConfigFilename()
-    {
-        if (Kernel::VERSION_ID >= 40200) {
-            return 'config_42.yml';
-        }
-
-
-        if (Kernel::VERSION_ID >= 30300) {
-            return 'config_33.yml';
-        }
-
-        if (Kernel::VERSION_ID >= 30000) {
-            return 'config_32.yml';
-        }
-
-        return 'config_27.yml';
-    }
-
     public function getProjectDir(): string
     {
         return __DIR__;
@@ -59,12 +41,12 @@ final class TestKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__."/config/{$this->config_file}");
     }
 
-    protected function prepareContainer(ContainerBuilder $container)
+    protected function prepareContainer(ContainerBuilder $container): void
     {
         parent::prepareContainer($container);
 

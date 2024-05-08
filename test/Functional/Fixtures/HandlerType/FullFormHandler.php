@@ -24,6 +24,9 @@ class FullFormHandler implements HandlerTypeInterface, ActionSubscriberInterface
         $config->registerActionSubscriber($this);
     }
 
+    /**
+     * @return string[]
+     */
     public function getSubscribedActions()
     {
         return [
@@ -32,12 +35,12 @@ class FullFormHandler implements HandlerTypeInterface, ActionSubscriberInterface
         ];
     }
 
-    public function onSuccess(TestData $data, FormInterface $form, Request $request)
+    public function onSuccess(TestData $data, FormInterface $form, Request $request): RedirectResponse
     {
         return new RedirectResponse('http://success.nl/');
     }
 
-    public function onFailure(TestData $data, FormInterface $form, Request $request)
+    public function onFailure(TestData $data, FormInterface $form, Request $request): RedirectResponse
     {
         return new RedirectResponse('http://failure.nl/');
     }
