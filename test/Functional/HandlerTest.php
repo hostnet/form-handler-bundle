@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace Hostnet\Bundle\FormHandlerBundle\Functional;
 
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler;
-use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\HandlerType\FullFormHandler27;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestData;
 use Hostnet\Bundle\FormHandlerBundle\Functional\Fixtures\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -23,7 +22,7 @@ class HandlerTest extends KernelTestCase
      */
     protected function setUp(): void
     {
-        static::bootKernel(['config_file' => TestKernel::getLegacyConfigFilename()]);
+        static::bootKernel(['config_file' => 'autoconfigure.yml']);
     }
 
     protected static function createKernel(array $options = []): KernelInterface
@@ -52,59 +51,11 @@ class HandlerTest extends KernelTestCase
 
     public function testInvalid(): void
     {
-        if (Kernel::VERSION_ID < 20800) {
-            self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
-        }
-
         $container       = self::$kernel->getContainer();
         $handler_factory = $container->get('hostnet.form_handler.factory');
         $request         = Request::create('/', 'POST', ['test' => ['test' => null]]);
 
         $handler = $handler_factory->create(FullFormHandler::class);
-        $data    = new TestData();
-
-        $response = $handler->handle($request, $data);
-
-        self::assertInstanceOf(RedirectResponse::class, $response);
-        self::assertEquals('http://failure.nl/', $response->getTargetUrl());
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testValid27(): void
-    {
-        if (Kernel::VERSION_ID >= 30000) {
-            self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
-        }
-
-        $container       = self::$kernel->getContainer();
-        $handler_factory = $container->get('hostnet.form_handler.factory');
-        $request         = Request::create('/', 'POST', ['test' => ['test' => 'foobar']]);
-
-        $handler = $handler_factory->create(FullFormHandler27::class);
-        $data    = new TestData();
-
-        $response = $handler->handle($request, $data);
-
-        self::assertInstanceOf(RedirectResponse::class, $response);
-        self::assertEquals('http://success.nl/', $response->getTargetUrl());
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testInvalid27(): void
-    {
-        if (Kernel::VERSION_ID >= 30000) {
-            self::markTestSkipped(sprintf('Symfony version %s not supported by test', Kernel::VERSION));
-        }
-
-        $container       = self::$kernel->getContainer();
-        $handler_factory = $container->get('hostnet.form_handler.factory');
-        $request         = Request::create('/', 'POST', ['test' => ['test' => null]]);
-
-        $handler = $handler_factory->create(FullFormHandler27::class);
         $data    = new TestData();
 
         $response = $handler->handle($request, $data);
